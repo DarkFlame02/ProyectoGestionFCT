@@ -13,7 +13,7 @@
         <tabs>
           <Tab fx:id="empresaTab" text="Empresa" />
           <Tab fx:id="alumnoTab" text="Alumno" />
-            <Tab fx:id="alumnoTab1" text="Tutor" />
+            <Tab fx:id="tutorTab" text="Tutor" />
             <Tab fx:id="practicasTab" text="Prácticas" />
             <Tab fx:id="visitasTab" text="Visitas" />
             <Tab fx:id="comentTab" text="Comentarios" />
