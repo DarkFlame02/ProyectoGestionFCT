@@ -1,4 +1,4 @@
-package dad;
+package aed;
 
 public class Main {
 }
