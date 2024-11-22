@@ -63,21 +63,6 @@ CREATE TABLE `comentarioscaptacion` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `contacto`
---
-
-CREATE TABLE `contacto` (
-  `dniContacto` varchar(9) NOT NULL,
-  `nombreContacto` varchar(50) NOT NULL,
-  `apellidosContacto` varchar(50) NOT NULL,
-  `telefonoContacto` varchar(50) NOT NULL,
-  `emailContacto` varchar(50) NOT NULL,
-  `idEmpresa` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `empresa`
 --
 
@@ -112,6 +97,7 @@ CREATE TABLE `tutorempresa` (
   `idTutorE` int(11) NOT NULL,
   `nombreTutorE` varchar(50) NOT NULL,
   `apellidosTutorE` varchar(50) NOT NULL,
+  `telefonoContacto` varchar(50),
   `emailTutorE` varchar(50) NOT NULL,
   `idEmpresa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -154,13 +140,6 @@ ALTER TABLE `asignacion`
 ALTER TABLE `comentarioscaptacion`
   ADD KEY `idEmpresa` (`idEmpresa`),
   ADD KEY `idTutor` (`idTutor`);
-
---
--- Indices de la tabla `contacto`
---
-ALTER TABLE `contacto`
-  ADD PRIMARY KEY (`dniContacto`),
-  ADD KEY `idEmpresa` (`idEmpresa`);
 
 --
 -- Indices de la tabla `empresa`
@@ -239,12 +218,6 @@ ALTER TABLE `asignacion`
 ALTER TABLE `comentarioscaptacion`
   ADD CONSTRAINT `comentarioscaptacion_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`idEmpresa`),
   ADD CONSTRAINT `comentarioscaptacion_ibfk_2` FOREIGN KEY (`idTutor`) REFERENCES `tutor` (`idTutor`);
-
---
--- Filtros para la tabla `contacto`
---
-ALTER TABLE `contacto`
-  ADD CONSTRAINT `contacto_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`idEmpresa`);
 
 --
 -- Filtros para la tabla `tutorempresa`
