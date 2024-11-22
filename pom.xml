@@ -12,6 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <exec.mainClass>aed.Main</exec.mainClass>
   </properties>
 
   <dependencies>
