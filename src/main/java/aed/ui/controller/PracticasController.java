@@ -1,9 +1,10 @@
 package aed.ui.controller;
 
-import aed.db.empresas.Empresas;
+import aed.db.alumnos.Alumnos;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
@@ -12,43 +13,25 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EmpresaController implements Initializable {
+public class PracticasController implements Initializable {
 
     // view
 
     @FXML
-    private TextField apellidosTutorEtext;
+    private TextField nombreAlumnoText;
 
     @FXML
-    private TextField direccionEmpresaText;
-
-    @FXML
-    private TextField emailTutorEtext;
-
-    @FXML
-    private ListView<Empresas> empresaList;
-
-    @FXML
-    private TextField nifText;
-
-    @FXML
-    private TextField nombreEmpresaText;
-
-    @FXML
-    private TextField nombreTutorEText;
+    private ListView<Alumnos> practicasList;
 
     @FXML
     private SplitPane root;
 
     @FXML
-    private TextField telefonoTutorEText;
+    private ComboBox<?> tutorECombo;
 
-    @FXML
-    private TextField tipoEmpresaText;
-
-    public EmpresaController() {
+    public PracticasController() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EmpresaView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PracticasView.fxml"));
             loader.setController(this);
             loader.load();
         } catch (IOException e) {
