@@ -19,6 +19,9 @@ public class RootController implements Initializable {
     private AlumnoController alumnoController = new AlumnoController();
     private EmpresaController empresaController = new EmpresaController();
     private TutorController tutorController = new TutorController();
+    private PracticasController practicasController = new PracticasController();
+    private VisitasController visitasController = new VisitasController();
+    private ComentariosController comentariosController = new ComentariosController();
 
     // view
 
@@ -61,6 +64,9 @@ public class RootController implements Initializable {
         alumnoTab.setContent(alumnoController.getRoot());
         empresaTab.setContent(empresaController.getRoot());
         tutorTab.setContent(tutorController.getRoot());
+        practicasTab.setContent(practicasController.getRoot());
+        visitasTab.setContent(visitasController.getRoot());
+        comentTab.setContent(comentariosController.getRoot());
     }
 
     public BorderPane getRoot() {
@@ -74,7 +80,7 @@ public class RootController implements Initializable {
 
     @FXML
     void onCloseAction(ActionEvent event) {
-
+        System.exit(0);
     }
 
     @FXML
