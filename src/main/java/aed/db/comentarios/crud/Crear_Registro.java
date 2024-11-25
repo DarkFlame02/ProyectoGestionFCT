@@ -1,4 +1,4 @@
-package aed.db.alumnos.crud;
+package aed.db.comentarios.crud;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,8 +21,8 @@ public class Crear_Registro {
             stmt.setString(5, "123456789012");
             stmt.setString(6, "1");
 
-            int filasCreadas = stmt.executeUpdate();
-            System.out.println(filasCreadas+" fila(s) creadas(s).");
+            int filasActuañizadas = stmt.executeUpdate();
+            System.out.println(filasActuañizadas+" fila(s) actualizadas(s).");
 
         } catch (SQLException e) {
             e.printStackTrace();

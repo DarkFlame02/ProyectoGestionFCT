@@ -1,4 +1,4 @@
-package aed.db.alumnos.crud;
+package aed.db.comentarios.crud;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,13 +8,11 @@ import java.sql.SQLException;
 public class Leer_Registro {
 
     public void listarAlumnos() {
-        String query = "SELECT * FROM alumnos WHERE idAlumno = ?";
+        String query = "SELECT * FROM alumnos";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
-
-            stmt.setInt(1,1);
 
             while (rs.next()) {
                 int id = rs.getInt("idAlumno");

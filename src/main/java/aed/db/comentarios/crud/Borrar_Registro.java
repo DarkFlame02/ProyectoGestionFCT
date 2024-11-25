@@ -1,4 +1,4 @@
-package aed.db.alumnos.crud;
+package aed.db.comentarios.crud;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 public class Borrar_Registro {
 
-    public void borrarAlumnos() {
-        String query = "DELETE FROM alumnos WHERE idAlumno = ?";
+    public void borrarComentario() {
+        String query = "DELETE FROM comentarioscaptacion WHERE ID = ?";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);

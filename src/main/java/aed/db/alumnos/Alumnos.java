@@ -1,5 +1,110 @@
 package aed.db.alumnos;
 
-public class Alumnos {
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
+public class Alumnos {
+    private final IntegerProperty IdAlumno;
+    private final StringProperty nombreAlumno;
+    private final StringProperty apellidosAlumno;
+    private final StringProperty cialAlumno;
+    private final StringProperty cursoAlumno;
+    private final StringProperty numSSAlumno;
+    private final StringProperty IdTutor;
+
+    public Alumnos(IntegerProperty idAlumno, StringProperty nombreAlumno, StringProperty apellidosAlumno, StringProperty cialAlumno, StringProperty cursoAlumno, StringProperty numSSAlumno, StringProperty idTutor) {
+        IdAlumno = idAlumno;
+        this.nombreAlumno = nombreAlumno;
+        this.apellidosAlumno = apellidosAlumno;
+        this.cialAlumno = cialAlumno;
+        this.cursoAlumno = cursoAlumno;
+        this.numSSAlumno = numSSAlumno;
+        IdTutor = idTutor;
+    }
+
+    public int getIdAlumno() {
+        return IdAlumno.get();
+    }
+
+    public IntegerProperty idAlumnoProperty() {
+        return IdAlumno;
+    }
+
+    public void setIdAlumno(int idAlumno) {
+        this.IdAlumno.set(idAlumno);
+    }
+
+    public String getNombreAlumno() {
+        return nombreAlumno.get();
+    }
+
+    public StringProperty nombreAlumnoProperty() {
+        return nombreAlumno;
+    }
+
+    public void setNombreAlumno(String nombreAlumno) {
+        this.nombreAlumno.set(nombreAlumno);
+    }
+
+    public String getApellidosAlumno() {
+        return apellidosAlumno.get();
+    }
+
+    public StringProperty apellidosAlumnoProperty() {
+        return apellidosAlumno;
+    }
+
+    public void setApellidosAlumno(String apellidosAlumno) {
+        this.apellidosAlumno.set(apellidosAlumno);
+    }
+
+    public String getCialAlumno() {
+        return cialAlumno.get();
+    }
+
+    public StringProperty cialAlumnoProperty() {
+        return cialAlumno;
+    }
+
+    public void setCialAlumno(String cialAlumno) {
+        this.cialAlumno.set(cialAlumno);
+    }
+
+    public String getCursoAlumno() {
+        return cursoAlumno.get();
+    }
+
+    public StringProperty cursoAlumnoProperty() {
+        return cursoAlumno;
+    }
+
+    public void setCursoAlumno(String cursoAlumno) {
+        this.cursoAlumno.set(cursoAlumno);
+    }
+
+    public String getNumSSAlumno() {
+        return numSSAlumno.get();
+    }
+
+    public StringProperty numSSAlumnoProperty() {
+        return numSSAlumno;
+    }
+
+    public void setNumSSAlumno(String numSSAlumno) {
+        this.numSSAlumno.set(numSSAlumno);
+    }
+
+    public String getIdTutor() {
+        return IdTutor.get();
+    }
+
+    public StringProperty idTutorProperty() {
+        return IdTutor;
+    }
+
+    public void setIdTutor(String idTutor) {
+        this.IdTutor.set(idTutor);
+    }
 }

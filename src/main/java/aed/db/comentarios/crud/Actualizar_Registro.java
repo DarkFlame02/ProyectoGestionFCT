@@ -1,4 +1,4 @@
-package aed.db.alumnos.crud;
+package aed.db.comentarios.crud;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,20 +7,16 @@ import java.sql.SQLException;
 
 public class Actualizar_Registro {
 
-    public void actualizarAlumnos() {
-        String query = "UPDATE alumnos SET nombreAlumno = ?, apellidosAlumno = ?, cialAlumno = ?, cursoAlumno = ?, numSSAlumno = ?, IdTutor = ? WHERE idAlumno = ?";
+    public void actualizarComentarios() {
+        String query = "UPDATE comentarioscaptacion SET comentario = ? WHERE IdTutor = ? AND IdEmpresa = ?";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
-            stmt.setString(1, "Pepe");
-            stmt.setString(2,"Pérez");
-            stmt.setString(3,"no tiene");
-            stmt.setString(4,"2Dam");
-            stmt.setString(5, "123456789012");
-            stmt.setString(6, "1");
-            stmt.setInt(7, 1);
+            stmt.setString(1, "Mu bien");
+            stmt.setInt(2, 1);
+            stmt.setInt(3, 1);
 
             int filasActualizadas = stmt.executeUpdate();
             System.out.println(filasActualizadas+" fila(s) actualizadas(s).");
