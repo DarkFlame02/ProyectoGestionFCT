@@ -29,7 +29,7 @@
             <ComboBox fx:id="tutorECombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             </children>
             <padding>
-                <Insets right="5.0" />
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </GridPane>
     </items>
