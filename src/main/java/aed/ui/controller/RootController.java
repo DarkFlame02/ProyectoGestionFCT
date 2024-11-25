@@ -13,6 +13,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class RootController implements Initializable {
+
+    // controllers
+
+    private AlumnoController alumnoController = new AlumnoController();
+    private EmpresaController empresaController = new EmpresaController();
+    private TutorController tutorController = new TutorController();
+
+    // view
+
     @FXML
     private Tab alumnoTab;
 
@@ -49,7 +58,9 @@ public class RootController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        alumnoTab.setContent(alumnoController.getRoot());
+        empresaTab.setContent(empresaController.getRoot());
+        tutorTab.setContent(tutorController.getRoot());
     }
 
     public BorderPane getRoot() {
