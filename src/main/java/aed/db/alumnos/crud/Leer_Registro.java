@@ -15,11 +15,15 @@ public class Leer_Registro {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String nombre = rs.getString("nombre");
-                String carrera = rs.getString("carrera");
+                int id = rs.getInt("idAlumno");
+                String nombre = rs.getString("nombreAlumno");
+                String apellidos = rs.getString("apellidosAlumno");
+                String cial = rs.getString("cialAlumno");
+                String curso = rs.getString("cursoAlumno");
+                String numSS = rs.getString("numSSAlumno");
+                String IdTutor = rs.getString("IdTutor");
 
-                System.out.println("ID: " + id + ", Nombre: " + nombre + ", Carrera: " + carrera);
+                System.out.println("ID: " + id + ", \nNombre: " + nombre + ", \nApellidos: " + apellidos + ", \nCial: " + cial + ", \nCurso: " + curso + ", \nNúmeroSS: " + numSS + ", \nIdTutor: " + IdTutor);
             }
 
         } catch (SQLException e) {

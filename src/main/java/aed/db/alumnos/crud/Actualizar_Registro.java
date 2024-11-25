@@ -20,6 +20,7 @@ public class Actualizar_Registro {
             stmt.setString(4,"2Dam");
             stmt.setString(5, "123456789012");
             stmt.setString(6, "1");
+            stmt.setInt(7, 1);
 
             int filasActuañizadas = stmt.executeUpdate();
             System.out.println(filasActuañizadas+" fila(s) actualizadas(s).");
