@@ -6,7 +6,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class registrar {
+public class ConexionHCP {
     private static HikariDataSource dataSource;
 
     static {
