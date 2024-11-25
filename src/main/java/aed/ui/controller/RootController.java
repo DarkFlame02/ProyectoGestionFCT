@@ -80,7 +80,7 @@ public class RootController implements Initializable {
 
     @FXML
     void onCloseAction(ActionEvent event) {
-
+        System.exit(0);
     }
 
     @FXML
