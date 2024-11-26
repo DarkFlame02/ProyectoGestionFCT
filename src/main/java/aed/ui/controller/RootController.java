@@ -1,5 +1,11 @@
 package aed.ui.controller;
 
+import aed.db.alumnos.Alumnos;
+import aed.ui.dialog.BuscarAlumnoDialog;
+import javafx.beans.Observable;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +28,10 @@ public class RootController implements Initializable {
     private PracticasController practicasController = new PracticasController();
     private VisitasController visitasController = new VisitasController();
     private ComentariosController comentariosController = new ComentariosController();
+
+    // model
+
+
 
     // view
 
@@ -67,6 +77,7 @@ public class RootController implements Initializable {
         practicasTab.setContent(practicasController.getRoot());
         visitasTab.setContent(visitasController.getRoot());
         comentTab.setContent(comentariosController.getRoot());
+
     }
 
     public BorderPane getRoot() {
@@ -90,7 +101,10 @@ public class RootController implements Initializable {
 
     @FXML
     void onSearchAction(ActionEvent event) {
-
+        BuscarAlumnoDialog dialog = new BuscarAlumnoDialog();
+        dialog.showAndWait().ifPresent(buscar -> {
+            System.out.println(buscar.getIdAlumno());
+        });
     }
 
     @FXML

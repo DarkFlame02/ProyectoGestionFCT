@@ -6,23 +6,25 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Alumnos {
-    private final IntegerProperty IdAlumno;
-    private final StringProperty nombreAlumno;
-    private final StringProperty apellidosAlumno;
-    private final StringProperty cialAlumno;
-    private final StringProperty cursoAlumno;
-    private final StringProperty numSSAlumno;
-    private final IntegerProperty IdTutor;
+    private IntegerProperty IdAlumno = new SimpleIntegerProperty();
+    private StringProperty nombreAlumno = new SimpleStringProperty();
+    private StringProperty apellidosAlumno = new SimpleStringProperty();
+    private StringProperty cialAlumno = new SimpleStringProperty();
+    private StringProperty cursoAlumno = new SimpleStringProperty();
+    private StringProperty numSSAlumno = new SimpleStringProperty();
+    private IntegerProperty IdTutor = new SimpleIntegerProperty();
 
     public Alumnos(IntegerProperty idAlumno, StringProperty nombreAlumno, StringProperty apellidosAlumno, StringProperty cialAlumno, StringProperty cursoAlumno, StringProperty numSSAlumno, IntegerProperty idTutor) {
-        IdAlumno = idAlumno;
+        this.IdAlumno = idAlumno;
         this.nombreAlumno = nombreAlumno;
         this.apellidosAlumno = apellidosAlumno;
         this.cialAlumno = cialAlumno;
         this.cursoAlumno = cursoAlumno;
         this.numSSAlumno = numSSAlumno;
-        IdTutor = idTutor;
+        this.IdTutor = idTutor;
     }
+
+    public Alumnos() {}
 
     public int getIdAlumno() {
         return IdAlumno.get();

@@ -1,4 +1,4 @@
-package aed.ui;
+package aed;
 
 import aed.ui.controller.RootController;
 import javafx.application.Application;

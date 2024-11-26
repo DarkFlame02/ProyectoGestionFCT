@@ -1,6 +1,5 @@
 package aed;
 
-import aed.ui.GestionFCTApp;
 import javafx.application.Application;
 
 public class Main {
