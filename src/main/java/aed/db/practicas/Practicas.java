@@ -1,10 +1,15 @@
 package aed.db.practicas;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Practicas {
-    private IntegerProperty IdAlumno;
-    private IntegerProperty IdTutorE;
+    private IntegerProperty IdAlumno = new SimpleIntegerProperty();
+    private IntegerProperty IdTutorE = new SimpleIntegerProperty();
+
+    public Practicas(){
+
+    }
 
     public Practicas(IntegerProperty idAlumno, IntegerProperty idTutorE) {
         IdAlumno = idAlumno;
