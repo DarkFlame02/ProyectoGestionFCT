@@ -10,13 +10,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Nombre_Alumno {
 
-    public static ObservableList<Alumnos> nombreAlumno() {
+    public static ObservableList<Alumnos> listarAlumnos() {
 
-        ObservableList<Alumnos> alumnos = FXCollections.observableArrayList();
-        String query = "SELECT nombreAlumno, apellidosAlumno FROM alumnos";
+        ObservableList<Alumnos> listaAlumnos = FXCollections.observableArrayList();
+        String query = "SELECT nombreAlumno, apellidosAlumno, cialAlumno, cursoAlumno, numSSAlumno FROM alumnos";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
@@ -25,11 +27,15 @@ public class Nombre_Alumno {
             while (rs.next()) {
                 String nombre = rs.getString("nombreAlumno");
                 String apellidos = rs.getString("apellidosAlumno");
-                alumnos.add(new Alumnos(nombre, apellidos));
+                String cial = rs.getString("cialAlumno");
+                String curso = rs.getString("cursoAlumno");
+                String numSS = rs.getString("numSSAlumno");
+                Alumnos alumno = new Alumnos(nombre, apellidos, cial, curso, numSS);
+                listaAlumnos.add(alumno);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new SimpleListProperty<>(alumnos);
+        return listaAlumnos;
     }
 }

@@ -12,7 +12,7 @@ public class Alumnos {
     private StringProperty cialAlumno = new SimpleStringProperty();
     private StringProperty cursoAlumno = new SimpleStringProperty();
     private StringProperty numSSAlumno = new SimpleStringProperty();
-    private IntegerProperty IdTutor = new SimpleIntegerProperty();
+    private IntegerProperty idTutor = new SimpleIntegerProperty();
 
     public Alumnos(IntegerProperty idAlumno, StringProperty nombreAlumno, StringProperty apellidosAlumno, StringProperty cialAlumno, StringProperty cursoAlumno, StringProperty numSSAlumno, IntegerProperty idTutor) {
         this.IdAlumno = idAlumno;
@@ -21,12 +21,17 @@ public class Alumnos {
         this.cialAlumno = cialAlumno;
         this.cursoAlumno = cursoAlumno;
         this.numSSAlumno = numSSAlumno;
-        this.IdTutor = idTutor;
+        this.idTutor = idTutor;
     }
 
     public Alumnos() {}
 
-    public Alumnos(String nombre, String apellidos) {
+    public Alumnos(String nombre, String apellidos, String cial, String curso, String numSS) {
+        this.nombreAlumno.set(nombre);
+        this.apellidosAlumno.set(apellidos);
+        this.cialAlumno.set(cial);
+        this.cursoAlumno.set(curso);
+        this.numSSAlumno.set(numSS);
     }
 
     public int getIdAlumno() {
@@ -102,15 +107,15 @@ public class Alumnos {
     }
 
     public int getIdTutor() {
-        return IdTutor.get();
+        return idTutor.get();
     }
 
     public IntegerProperty idTutorProperty() {
-        return IdTutor;
+        return idTutor;
     }
 
     public void setIdTutor(int idTutor) {
-        this.IdTutor.set(idTutor);
+        this.idTutor.set(idTutor);
     }
 
     @Override

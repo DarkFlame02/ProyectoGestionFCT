@@ -74,35 +74,41 @@ public class AlumnoController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        alumno.addListener(this::onAlumnoChanged);
+        Nombre_Alumno leerRegistro = new Nombre_Alumno();
+        ObservableList<Alumnos> alumnosList = FXCollections.observableArrayList(Nombre_Alumno.listarAlumnos());
+
+        alumnos.set(alumnosList);
 
         // bindings
 
         alumnoList.itemsProperty().bind(alumnos);
 
-        ListProperty<Alumnos> alumnosListProperty = (ListProperty<Alumnos>) Nombre_Alumno.nombreAlumno();
-        alumnoList.itemsProperty().bind(alumnosListProperty);
+        alumnoList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                alumno.set(newValue);
+            }
+        });
 
         selectedAlumno.bind(alumnoList.getSelectionModel().selectedItemProperty());
-
+        alumno.addListener(this::onAlumnoChanged);
 
     }
 
     private void onAlumnoChanged(ObservableValue<? extends Alumnos> o, Alumnos oldValue, Alumnos newValue) {
-        if (newValue != null) {
-            nombreText.textProperty().bindBidirectional(newValue.nombreAlumnoProperty());
-            apellidosText.textProperty().bindBidirectional(newValue.apellidosAlumnoProperty());
-            cialText.textProperty().bindBidirectional(newValue.cialAlumnoProperty());
-            cursoText.textProperty().bindBidirectional(newValue.cursoAlumnoProperty());
-            numssText.textProperty().bindBidirectional(newValue.numSSAlumnoProperty());
+        if (oldValue != null) {
+            oldValue.setNombreAlumno(nombreText.getText());
+            oldValue.setApellidosAlumno(apellidosText.getText());
+            oldValue.setCialAlumno(cialText.getText());
+            oldValue.setCursoAlumno(cursoText.getText());
+            oldValue.setNumSSAlumno(numssText.getText());
         }
 
-        if (oldValue != null) {
-            nombreText.textProperty().unbindBidirectional(oldValue.nombreAlumnoProperty());
-            apellidosText.textProperty().unbindBidirectional(oldValue.apellidosAlumnoProperty());
-            cialText.textProperty().unbindBidirectional(oldValue.cialAlumnoProperty());
-            cursoText.textProperty().unbindBidirectional(oldValue.cursoAlumnoProperty());
-            numssText.textProperty().unbindBidirectional(oldValue.numSSAlumnoProperty());
+        if (newValue != null) {
+            nombreText.setText(newValue.getNombreAlumno());
+            apellidosText.setText(newValue.getApellidosAlumno());
+            cialText.setText(newValue.getCialAlumno());
+            cursoText.setText(newValue.getCursoAlumno());
+            numssText.setText(newValue.getNumSSAlumno());
         }
 
     }
