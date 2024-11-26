@@ -1,6 +1,7 @@
 package aed.ui.controller;
 
 import aed.db.alumnos.Alumnos;
+import aed.db.alumnos.crud.Nombre_Alumno;
 import aed.db.tutor.Tutor;
 import javafx.application.Application;
 import javafx.beans.Observable;
@@ -10,6 +11,7 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -77,6 +79,10 @@ public class AlumnoController implements Initializable {
         // bindings
 
         alumnoList.itemsProperty().bind(alumnos);
+
+        ListProperty<Alumnos> alumnosListProperty = (ListProperty<Alumnos>) Nombre_Alumno.nombreAlumno();
+        alumnoList.itemsProperty().bind(alumnosListProperty);
+
         selectedAlumno.bind(alumnoList.getSelectionModel().selectedItemProperty());
 
 

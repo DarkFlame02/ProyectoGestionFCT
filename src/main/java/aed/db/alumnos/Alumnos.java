@@ -26,6 +26,9 @@ public class Alumnos {
 
     public Alumnos() {}
 
+    public Alumnos(String nombre, String apellidos) {
+    }
+
     public int getIdAlumno() {
         return IdAlumno.get();
     }
@@ -108,5 +111,10 @@ public class Alumnos {
 
     public void setIdTutor(int idTutor) {
         this.IdTutor.set(idTutor);
+    }
+
+    @Override
+    public String toString() {
+        return getNombreAlumno() + " " + getApellidosAlumno();
     }
 }
