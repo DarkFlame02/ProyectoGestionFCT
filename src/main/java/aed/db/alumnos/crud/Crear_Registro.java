@@ -1,5 +1,7 @@
 package aed.db.alumnos.crud;
 
+import aed.db.conexionHCP.ConexionHCP;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,7 +9,7 @@ import java.sql.SQLException;
 
 public class Crear_Registro {
 
-    public void actualizarAlumnos() {
+    public void registrarAlumnos() {
         String query = "INSERT INTO alumnos(nombreAlumno, apellidosAlumno, cialAlumno, cursoAlumno, numSSAlumno, IdTutor) VALUES(?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = ConexionHCP.getConnection();

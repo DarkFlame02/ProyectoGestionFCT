@@ -1,4 +1,4 @@
-package aed.db.alumnos.crud;
+package aed.db.practicas.crud;
 
 import aed.db.conexionHCP.ConexionHCP;
 
@@ -9,14 +9,16 @@ import java.sql.SQLException;
 
 public class Borrar_Registro {
 
-    public void borrarAlumnos() {
-        String query = "DELETE FROM alumnos WHERE idAlumno = ?";
+    public void borrarPractica() {
+        String query = "DELETE FROM asignacion WHERE IdAlumno = ? AND IdTutorE = ?";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
             stmt.setInt(1, 1);
+            stmt.setInt(2, 1);
+
             int filasEliminadas = stmt.executeUpdate();
             System.out.println(filasEliminadas+" fila(s) eliminada(s).");
 

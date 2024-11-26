@@ -1,4 +1,4 @@
-package aed.db.comentarios.crud;
+package aed.db.practicas.crud;
 
 import aed.db.conexionHCP.ConexionHCP;
 
@@ -9,16 +9,17 @@ import java.sql.SQLException;
 
 public class Actualizar_Registro {
 
-    public void actualizarComentarios() {
-        String query = "UPDATE comentarioscaptacion SET comentario = ? WHERE IdTutor = ? AND IdEmpresa = ?";
+    public void actualizarPracticas() {
+        String query = "UPDATE asignacion SET IdAlumno = ?, IdTutorE = ? WHERE IdAlumno = ? AND IdTutorE = ?";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
-            stmt.setString(1, "Mu bien");
-            stmt.setInt(2, 1);
-            stmt.setInt(3, 1);
+            stmt.setInt(1, 2); //IdAlumno Mod
+            stmt.setInt(2, 2); //IdTutorE Mod
+            stmt.setInt(3, 1); //IdAlumno OG
+            stmt.setInt(4, 1); //IdTutorE OG
 
             int filasActualizadas = stmt.executeUpdate();
             System.out.println(filasActualizadas+" fila(s) actualizadas(s).");

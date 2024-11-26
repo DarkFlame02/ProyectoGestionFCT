@@ -1,5 +1,7 @@
 package aed.db.alumnos.crud;
 
+import aed.db.conexionHCP.ConexionHCP;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

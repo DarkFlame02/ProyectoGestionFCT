@@ -1,4 +1,4 @@
-package aed.db.alumnos.crud;
+package aed.db.conexionHCP;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

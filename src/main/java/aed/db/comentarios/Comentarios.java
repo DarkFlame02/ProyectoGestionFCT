@@ -1,12 +1,18 @@
 package aed.db.comentarios;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Comentarios {
-    private final IntegerProperty idEmpresa;
-    private final IntegerProperty idTutor;
-    private final StringProperty comentario;
+    private IntegerProperty idEmpresa = new SimpleIntegerProperty();
+    private IntegerProperty idTutor = new SimpleIntegerProperty();
+    private StringProperty comentario = new SimpleStringProperty();
+
+    public Comentarios() {
+
+    }
 
     public Comentarios(IntegerProperty idEmpresa, IntegerProperty idTutor, StringProperty comentario) {
         this.idEmpresa = idEmpresa;

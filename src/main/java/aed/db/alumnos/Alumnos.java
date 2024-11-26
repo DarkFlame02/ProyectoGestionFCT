@@ -12,9 +12,9 @@ public class Alumnos {
     private final StringProperty cialAlumno;
     private final StringProperty cursoAlumno;
     private final StringProperty numSSAlumno;
-    private final StringProperty IdTutor;
+    private final IntegerProperty IdTutor;
 
-    public Alumnos(IntegerProperty idAlumno, StringProperty nombreAlumno, StringProperty apellidosAlumno, StringProperty cialAlumno, StringProperty cursoAlumno, StringProperty numSSAlumno, StringProperty idTutor) {
+    public Alumnos(IntegerProperty idAlumno, StringProperty nombreAlumno, StringProperty apellidosAlumno, StringProperty cialAlumno, StringProperty cursoAlumno, StringProperty numSSAlumno, IntegerProperty idTutor) {
         IdAlumno = idAlumno;
         this.nombreAlumno = nombreAlumno;
         this.apellidosAlumno = apellidosAlumno;
@@ -96,15 +96,15 @@ public class Alumnos {
         this.numSSAlumno.set(numSSAlumno);
     }
 
-    public String getIdTutor() {
+    public int getIdTutor() {
         return IdTutor.get();
     }
 
-    public StringProperty idTutorProperty() {
+    public IntegerProperty idTutorProperty() {
         return IdTutor;
     }
 
-    public void setIdTutor(String idTutor) {
+    public void setIdTutor(int idTutor) {
         this.IdTutor.set(idTutor);
     }
 }
