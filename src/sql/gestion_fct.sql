@@ -163,6 +163,7 @@ INSERT INTO `tutorempresa` (`idTutorE`, `nombreTutorE`, `apellidosTutorE`, `tele
 --
 
 CREATE TABLE `visitas` (
+  `idVisita` int(11) NOT NULL,
   `fechaVisita` date NOT NULL,
   `idAlumno` int(11) NOT NULL,
   `comentario` text DEFAULT NULL
@@ -172,10 +173,10 @@ CREATE TABLE `visitas` (
 -- Volcado de datos para la tabla `visitas`
 --
 
-INSERT INTO `visitas` (`fechaVisita`, `idAlumno`, `comentario`) VALUES
-('2024-11-01', 1, 'Visita realizada para revisar el progreso del alumno, todo en orden.'),
-('2024-11-10', 2, 'Visita para resolver dudas sobre el proyecto final. El alumno mostró buen desempeño.'),
-('2024-11-15', 3, 'Visita para discutir áreas de mejora en la tarea asignada. El alumno necesita más apoyo en el tema.');
+INSERT INTO `visitas` (`idVisita`, `fechaVisita`, `idAlumno`, `comentario`) VALUES
+('1', '2024-11-01', 1, 'Visita realizada para revisar el progreso del alumno, todo en orden.'),
+('2', '2024-11-10', 2, 'Visita para resolver dudas sobre el proyecto final. El alumno mostró buen desempeño.'),
+('3', '2024-11-15', 3, 'Visita para discutir áreas de mejora en la tarea asignada. El alumno necesita más apoyo en el tema.');
 
 --
 -- Índices para tablas volcadas
@@ -228,6 +229,7 @@ ALTER TABLE `tutorempresa`
 -- Indices de la tabla `visitas`
 --
 ALTER TABLE `visitas`
+  ADD PRIMARY KEY (`idVisita`),
   ADD KEY `idAlumno` (`idAlumno`);
 
 --
@@ -257,6 +259,14 @@ ALTER TABLE `tutor`
 --
 ALTER TABLE `tutorempresa`
   MODIFY `idTutorE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `visitas`
+--
+
+ALTER TABLE `visitas`
+  MODIFY `idVisita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 
 --
 -- Restricciones para tablas volcadas
