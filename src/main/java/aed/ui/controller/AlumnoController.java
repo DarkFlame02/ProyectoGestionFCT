@@ -73,8 +73,6 @@ public class AlumnoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        Nombre_Alumno leerRegistro = new Nombre_Alumno();
         ObservableList<Alumnos> alumnosList = FXCollections.observableArrayList(Nombre_Alumno.listarAlumnos());
 
         alumnos.set(alumnosList);

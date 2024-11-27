@@ -1,6 +1,15 @@
 package aed.ui.controller;
 
-import aed.db.empresas.Empresas;
+import aed.db.comentarios.Comentarios;
+import aed.db.comentarios.crud.Comentarios_Empresa;
+import javafx.beans.Observable;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,13 +24,23 @@ import java.util.ResourceBundle;
 
 public class ComentariosController implements Initializable {
 
+    // model
+
+    private final ObjectProperty<Comentarios> comentario = new SimpleObjectProperty<>();
+    private final ListProperty<Comentarios> comentarios = new SimpleListProperty<>(
+            FXCollections.observableArrayList(
+                    comentario -> new Observable[] { comentario.nombreEmpresaProperty() } // indicamos que properties de cada bean son observables dentro de la lista
+            )
+    );
+    private final ObjectProperty<Comentarios> selectedComentario = new SimpleObjectProperty<>();
+
     // view
 
     @FXML
     private TextArea comentarioText;
 
     @FXML
-    private ListView<Empresas> empresaList;
+    private ListView<Comentarios> comentarioList;
 
     @FXML
     private TextField empresaText;
@@ -44,7 +63,37 @@ public class ComentariosController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ObservableList<Comentarios> comentariosList = FXCollections.observableArrayList(Comentarios_Empresa.listarComentarios());
 
+        comentarios.set(comentariosList);
+
+        // bindings
+
+        comentarioList.itemsProperty().bind(comentarios);
+
+        comentarioList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                comentario.set(newValue);
+            }
+        });
+
+        selectedComentario.bind(comentarioList.getSelectionModel().selectedItemProperty());
+        comentario.addListener(this::onComentarioChanged);
+    }
+
+    private void onComentarioChanged(ObservableValue<? extends Comentarios> o, Comentarios oldValue, Comentarios newValue) {
+        if (oldValue != null) {
+            oldValue.setNombreEmpresa(empresaText.getText());
+            oldValue.setIdTutor(Integer.parseInt(tutorText.getText()));
+            oldValue.setComentario(comentarioText.getText());
+
+        }
+
+        if (newValue != null) {
+            empresaText.setText(newValue.getNombreEmpresa());
+            tutorText.setText(String.valueOf(newValue.getIdTutor()));
+            comentarioText.setText(newValue.getComentario());
+        }
     }
 
     public SplitPane getRoot() {

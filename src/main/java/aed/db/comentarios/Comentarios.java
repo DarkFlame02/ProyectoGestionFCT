@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Comentarios {
-    private IntegerProperty idEmpresa = new SimpleIntegerProperty();
+    private StringProperty nombreEmpresa = new SimpleStringProperty();
     private IntegerProperty idTutor = new SimpleIntegerProperty();
     private StringProperty comentario = new SimpleStringProperty();
 
@@ -14,22 +14,28 @@ public class Comentarios {
 
     }
 
-    public Comentarios(IntegerProperty idEmpresa, IntegerProperty idTutor, StringProperty comentario) {
-        this.idEmpresa = idEmpresa;
+    public Comentarios(StringProperty nombreEmpresa, IntegerProperty idTutor, StringProperty comentario) {
+        this.nombreEmpresa = nombreEmpresa;
         this.idTutor = idTutor;
         this.comentario = comentario;
     }
 
-    public int getIdEmpresa() {
-        return idEmpresa.get();
+    public Comentarios(String nombreEmpresa, int idTutor, String comentarios) {
+        this.nombreEmpresa.set(nombreEmpresa);
+        this.idTutor.set(idTutor);
+        this.comentario.set(comentarios);
     }
 
-    public IntegerProperty idEmpresaProperty() {
-        return idEmpresa;
+    public String getNombreEmpresa() {
+        return nombreEmpresa.get();
     }
 
-    public void setIdEmpresa(int idEmpresa) {
-        this.idEmpresa.set(idEmpresa);
+    public StringProperty nombreEmpresaProperty() {
+        return nombreEmpresa;
+    }
+
+    public void setNombreEmpresa(String nombreEmpresa) {
+        this.nombreEmpresa.set(nombreEmpresa);
     }
 
     public int getIdTutor() {
@@ -54,5 +60,10 @@ public class Comentarios {
 
     public void setComentario(String comentario) {
         this.comentario.set(comentario);
+    }
+
+    @Override
+    public String toString() {
+        return getNombreEmpresa();
     }
 }

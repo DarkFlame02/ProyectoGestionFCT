@@ -79,7 +79,6 @@ public class EmpresaController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Nombre_Empresa leerRegistro = new Nombre_Empresa();
         ObservableList<Empresas> empresasList = FXCollections.observableArrayList(Nombre_Empresa.listarEmpresas());
 
         empresas.set(empresasList);
