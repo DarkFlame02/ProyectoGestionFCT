@@ -1,10 +1,12 @@
 package aed.ui.controller;
 
 import aed.db.visitas.Visitas;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +26,7 @@ public class VisitasController implements Initializable {
     private ListView<Visitas> fechaList;
 
     @FXML
-    private SplitPane root;
+    private BorderPane root;
 
     @FXML
     private DatePicker visitaDate;
@@ -44,7 +46,32 @@ public class VisitasController implements Initializable {
 
     }
 
-    public SplitPane getRoot() {
+    public BorderPane getRoot() {
         return root;
+    }
+
+    @FXML
+    void onAddAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onCloseAction(ActionEvent event) {
+        System.exit(0);
+    }
+
+    @FXML
+    void onDeleteAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onSearchAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onUpdateAction(ActionEvent event) {
+
     }
 }

@@ -1,7 +1,5 @@
 package aed.ui.controller;
 
-import aed.db.alumnos.Alumnos;
-import aed.db.alumnos.crud.Nombre_Alumno;
 import aed.db.empresas.Empresas;
 import aed.db.empresas.crud.Nombre_Empresa;
 import javafx.beans.Observable;
@@ -12,12 +10,14 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,7 +59,7 @@ public class EmpresaController implements Initializable {
     private TextField nombreTutorEText;
 
     @FXML
-    private SplitPane root;
+    private BorderPane root;
 
     @FXML
     private TextField telefonoTutorEText;
@@ -122,7 +122,33 @@ public class EmpresaController implements Initializable {
 
     }
 
-    public SplitPane getRoot() {
+    public BorderPane getRoot() {
         return root;
     }
+
+    @FXML
+    void onAddAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onCloseAction(ActionEvent event) {
+        System.exit(0);
+    }
+
+    @FXML
+    void onDeleteAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onSearchAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onUpdateAction(ActionEvent event) {
+
+    }
+
 }

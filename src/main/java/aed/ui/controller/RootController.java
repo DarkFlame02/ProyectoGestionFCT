@@ -85,31 +85,10 @@ public class RootController implements Initializable {
     }
 
     @FXML
-    void onAddAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onCloseAction(ActionEvent event) {
-        System.exit(0);
-    }
-
-    @FXML
-    void onDeleteAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void onSearchAction(ActionEvent event) {
         BuscarAlumnoDialog dialog = new BuscarAlumnoDialog();
         dialog.showAndWait().ifPresent(buscar -> {
             System.out.println(buscar.getIdAlumno());
         });
     }
-
-    @FXML
-    void onUpdateAction(ActionEvent event) {
-
-    }
-
 }

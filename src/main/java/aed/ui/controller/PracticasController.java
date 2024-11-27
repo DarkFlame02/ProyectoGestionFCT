@@ -1,8 +1,6 @@
 package aed.ui.controller;
 
-import aed.db.alumnos.Alumnos;
-import aed.db.comentarios.Comentarios;
-import aed.db.comentarios.crud.Comentarios_Empresa;
+
 import aed.db.practicas.Practicas;
 import aed.db.practicas.crud.Practicas_Empresa;
 import javafx.beans.Observable;
@@ -13,13 +11,13 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -49,7 +47,7 @@ public class PracticasController implements Initializable {
     private ListView<Practicas> practicaList;
 
     @FXML
-    private SplitPane root;
+    private BorderPane root;
 
     public PracticasController() {
         try {
@@ -93,7 +91,32 @@ public class PracticasController implements Initializable {
         }
     }
 
-    public SplitPane getRoot() {
+    public BorderPane getRoot() {
         return root;
+    }
+
+    @FXML
+    void onAddAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onCloseAction(ActionEvent event) {
+        System.exit(0);
+    }
+
+    @FXML
+    void onDeleteAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onSearchAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onUpdateAction(ActionEvent event) {
+
     }
 }
