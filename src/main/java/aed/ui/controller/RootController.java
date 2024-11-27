@@ -83,12 +83,4 @@ public class RootController implements Initializable {
     public BorderPane getRoot() {
         return root;
     }
-
-    @FXML
-    void onSearchAction(ActionEvent event) {
-        BuscarAlumnoDialog dialog = new BuscarAlumnoDialog();
-        dialog.showAndWait().ifPresent(buscar -> {
-            System.out.println(buscar.getIdAlumno());
-        });
-    }
 }

@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Leer_Registro {
+public class Leer_Empresas {
 
     public void listarEmpresa() {
         String query = "SELECT * FROM empresa e JOIN tutorempresa t ON e.IdEmpresa = t.idEmpresa WHERE IdEmpresa = ?";

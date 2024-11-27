@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Crear_Registro {
+public class Crear_Empresas {
 
     public void registrarEmpresa() {
         String query = "INSERT INTO empresa (nifEmpresa, nombreEmpresa, direccionEmpresa, tipoEmpresa) VALUES (?, ?, ?, ?); SET @lastId = LAST_INSERT_ID(); INSERT INTO TutorE_Primaria (nombreTutorE, apellidosTutorE, telefonoContacto, emailTutorE, idEmpresa) VALUES (?, ?, ?, ?, @lastId);\n";

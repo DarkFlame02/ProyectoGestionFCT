@@ -2,6 +2,7 @@ package aed.ui.controller;
 
 import aed.db.alumnos.Alumnos;
 import aed.db.alumnos.crud.Nombre_Alumno;
+import aed.ui.dialog.BuscarAlumnoDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -127,13 +128,16 @@ public class AlumnoController implements Initializable {
     }
 
     @FXML
-    void onSearchAction(ActionEvent event) {
+    void onUpdateAction(ActionEvent event) {
 
     }
 
     @FXML
-    void onUpdateAction(ActionEvent event) {
-
+    void onSearchAction(ActionEvent event) {
+        BuscarAlumnoDialog dialog = new BuscarAlumnoDialog();
+        dialog.showAndWait().ifPresent(buscar -> {
+            System.out.println(buscar.getIdAlumno());
+        });
     }
 
 }

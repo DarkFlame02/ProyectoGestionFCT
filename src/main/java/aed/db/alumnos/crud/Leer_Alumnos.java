@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Leer_Registro {
+public class Leer_Alumnos {
 
     public void listarAlumnos() {
         String query = "SELECT * FROM alumnos WHERE idAlumno = ?";

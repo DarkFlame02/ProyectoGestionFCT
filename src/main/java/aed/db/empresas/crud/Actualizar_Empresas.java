@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Actualizar_Registro {
+public class Actualizar_Empresas {
 
     public void actualizarEmpresas() {
         String query = "UPDATE empresa AS e JOIN tutorempresa AS t ON e.IdEmpresa = t.idEmpresa SET e.nifEmpresa = ?, e.nombreEmpresa = ?, e.direccionEmpresa = ?, e.tipoEmpresa = ?, t.nombreTutorE = ?, t.apellidosTutorE = ?, t.telefonoContacto = ?, t.emailTutorE = ? WHERE e.IdEmpresa = ?";

@@ -7,10 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Actualizar_Registro {
+public class Crear_Alumnos {
 
-    public void actualizarAlumnos() {
-        String query = "UPDATE alumnos SET nombreAlumno = ?, apellidosAlumno = ?, cialAlumno = ?, cursoAlumno = ?, numSSAlumno = ?, IdTutor = ? WHERE idAlumno = ?";
+    public void registrarAlumnos() {
+        String query = "INSERT INTO alumnos(nombreAlumno, apellidosAlumno, cialAlumno, cursoAlumno, numSSAlumno, IdTutor) VALUES(?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
@@ -22,10 +22,9 @@ public class Actualizar_Registro {
             stmt.setString(4,"2Dam");
             stmt.setString(5, "123456789012");
             stmt.setString(6, "1");
-            stmt.setInt(7, 1);
 
-            int filasActualizadas = stmt.executeUpdate();
-            System.out.println(filasActualizadas+" fila(s) actualizadas(s).");
+            int filasCreadas = stmt.executeUpdate();
+            System.out.println(filasCreadas+" fila(s) creadas(s).");
 
         } catch (SQLException e) {
             e.printStackTrace();

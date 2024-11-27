@@ -7,21 +7,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Actualizar_Registro {
+public class Crear_Comentarios {
 
-    public void actualizarComentarios() {
-        String query = "UPDATE comentarioscaptacion SET comentario = ? WHERE IdTutor = ? AND IdEmpresa = ?";
+    public void registrarComentarios() {
+        String query = "INSERT INTO comentarioscaptacion(IdEmpresa, IdTutor, comentario) VALUES(?, ?, ?)";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
-            stmt.setString(1, "Mu bien");
-            stmt.setInt(2, 1);
-            stmt.setInt(3, 1);
+            stmt.setInt(1, 1);
+            stmt.setInt(2,1);
+            stmt.setString(3,"no tiene");
 
-            int filasActualizadas = stmt.executeUpdate();
-            System.out.println(filasActualizadas+" fila(s) actualizadas(s).");
+            int filasCreadas = stmt.executeUpdate();
+            System.out.println(filasCreadas+" fila(s) creadas(s).");
 
         } catch (SQLException e) {
             e.printStackTrace();

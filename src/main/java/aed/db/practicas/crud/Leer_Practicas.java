@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Leer_Registro {
+public class Leer_Practicas{
 
     public void listarPractica() {
         String query = "SELECT * FROM asignacion WHERE IdAlumno = ? AND IdTutorE = ?";

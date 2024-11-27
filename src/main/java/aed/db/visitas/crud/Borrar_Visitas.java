@@ -1,4 +1,4 @@
-package aed.db.tutor.crud;
+package aed.db.visitas.crud;
 
 import aed.db.conexionHCP.ConexionHCP;
 
@@ -6,21 +6,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
-public class Crear_Registro {
+public class Borrar_Visitas {
 
-    public void registrarPractica() {
-        String query = "INSERT INTO asignacion(IdAlumnpo, IdTutorE) VALUES(?, ?)";
+    public void borrarVisitas() {
+        String query = "DELETE FROM visitas WHERE idVisita = ?";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
-            stmt.setInt(1,1);
-            stmt.setInt(2,1);
 
-            int filasCreadas = stmt.executeUpdate();
-            System.out.println(filasCreadas+" fila(s) creadas(s).");
+            stmt.setInt(1, 1);
+
+            int filasEliminadas = stmt.executeUpdate();
+            System.out.println(filasEliminadas+" fila(s) eliminada(s).");
 
         } catch (SQLException e) {
             e.printStackTrace();

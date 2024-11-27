@@ -13,6 +13,8 @@ public class Tutor {
 
     public Tutor() { }
 
+    public Tutor(String nombreTutor, String apellidosTutor) {}
+
     public Tutor(IntegerProperty idTutor, StringProperty nombreTutor, StringProperty apellidosTutor, StringProperty emailTutor) {
         IdTutor = idTutor;
         this.nombreTutor = nombreTutor;
@@ -66,5 +68,10 @@ public class Tutor {
 
     public void setEmailTutor(String emailTutor) {
         this.emailTutor.set(emailTutor);
+    }
+
+    @Override
+    public String toString() {
+        return getNombreTutor() + " " + getApellidosTutor();
     }
 }
