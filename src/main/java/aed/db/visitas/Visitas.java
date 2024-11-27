@@ -13,7 +13,11 @@ public class Visitas {
 
     public Visitas() {}
 
-    public Visitas(Date fechaVisita, String nombreAlumno) {}
+    public Visitas(Date fechaVisita, String nombreAlumno, String comentario) {
+        this.fechaVisita.set(fechaVisita);
+        this.nombreAlumno.set(nombreAlumno);
+        this.comentario.set(comentario);
+    }
 
     public Visitas(IntegerProperty idVisita, ObjectProperty<Date> fechaVisita, IntegerProperty idAlumnp, StringProperty comentario, StringProperty nombreAlumno) {
         this.idVisita = idVisita;
@@ -85,6 +89,6 @@ public class Visitas {
 
     @Override
     public String toString() {
-        return getFechaVisita() + " " + getNombreAlumno();
+        return getFechaVisita() + " -- " + getNombreAlumno();
     }
 }

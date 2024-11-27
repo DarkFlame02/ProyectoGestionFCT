@@ -1,12 +1,22 @@
 package aed.ui.controller;
 
+import aed.db.practicas.Practicas;
+import aed.db.practicas.crud.Practicas_Empresa;
 import aed.db.tutor.Tutor;
+import aed.db.tutor.crud.Nombre_Tutor;
+import javafx.beans.Observable;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
@@ -15,6 +25,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TutorController implements Initializable {
+
+    // model
+
+    private final ObjectProperty<Tutor> tutor = new SimpleObjectProperty<>();
+    private final ListProperty<Tutor> tutores = new SimpleListProperty<>(
+            FXCollections.observableArrayList(
+                    tutor -> new Observable[] { tutor.nombreTutorProperty() } // indicamos que properties de cada bean son observables dentro de la lista
+            )
+    );
+    private final ObjectProperty<Tutor> selectedComentario = new SimpleObjectProperty<>();
 
     // view
 
@@ -45,7 +65,36 @@ public class TutorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ObservableList<Tutor> tutoresList = FXCollections.observableArrayList(Nombre_Tutor.listarTutores());
 
+        tutores.set(tutoresList);
+
+        // bindings
+
+        tutorList.itemsProperty().bind(tutores);
+
+        tutorList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                tutor.set(newValue);
+            }
+        });
+
+        selectedComentario.bind(tutorList.getSelectionModel().selectedItemProperty());
+        tutor.addListener(this::onTutorChanged);
+    }
+
+    private void onTutorChanged(ObservableValue<? extends Tutor> o, Tutor oldValue, Tutor newValue) {
+        if (oldValue != null) {
+            oldValue.setNombreTutor(nombreText.getText());
+            oldValue.setApellidosTutor(apellidosText.getText());
+            oldValue.setEmailTutor(emailText.getText());
+        }
+
+        if (newValue != null) {
+            nombreText.setText(newValue.getNombreTutor());
+            apellidosText.setText(newValue.getApellidosTutor());
+            emailText.setText(newValue.getEmailTutor());
+        }
     }
 
     public BorderPane getRoot() {

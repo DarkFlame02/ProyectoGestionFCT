@@ -13,7 +13,11 @@ public class Tutor {
 
     public Tutor() { }
 
-    public Tutor(String nombreTutor, String apellidosTutor) {}
+    public Tutor(String nombreTutor, String apellidosTutor, String emailTutor) {
+        this.nombreTutor.set(nombreTutor);
+        this.apellidosTutor.set(apellidosTutor);
+        this.emailTutor.set(emailTutor);
+    }
 
     public Tutor(IntegerProperty idTutor, StringProperty nombreTutor, StringProperty apellidosTutor, StringProperty emailTutor) {
         IdTutor = idTutor;

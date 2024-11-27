@@ -14,12 +14,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <BorderPane fx:id="root" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <SplitPane dividerPositions="0.5" prefHeight="400.0" prefWidth="600.0">
           <items>
-              <ListView fx:id="fechaList" prefHeight="200.0" prefWidth="200.0" />
+              <ListView fx:id="visitaList" prefHeight="200.0" prefWidth="200.0" />
               <GridPane hgap="5.0" vgap="5.0">
                   <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -35,7 +34,7 @@
                       <Label text="Alumno:" GridPane.rowIndex="1" />
                       <Label text="Comentario:" GridPane.rowIndex="2" />
                   <DatePicker fx:id="visitaDate" GridPane.columnIndex="1" />
-                      <TextField fx:id="apellidosText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                      <TextField fx:id="nombreText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextArea fx:id="comentarioText" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   </children>
                   <padding>
