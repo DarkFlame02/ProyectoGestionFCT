@@ -2,7 +2,6 @@ package aed.db.alumnos.crud;
 
 import aed.db.alumnos.Alumnos;
 import aed.db.conexionHCP.ConexionHCP;
-import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,8 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Nombre_Alumno {
 

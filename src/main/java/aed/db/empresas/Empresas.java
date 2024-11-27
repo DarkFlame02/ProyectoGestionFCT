@@ -12,6 +12,7 @@ public class Empresas {
     private  StringProperty nifEmpresa = new SimpleStringProperty();
     private  StringProperty nombreEmpresa = new SimpleStringProperty();
     private  StringProperty direccionEmpresa = new SimpleStringProperty();
+    private  StringProperty tipoEmpresa =  new SimpleStringProperty();
     //TutorEmpresa
     private IntegerProperty IdTutorE = new SimpleIntegerProperty();
     private StringProperty nombreTutorE = new SimpleStringProperty();
@@ -23,16 +24,28 @@ public class Empresas {
 
     }
 
-    public Empresas(IntegerProperty idEmpresa, StringProperty nifEmpresa, StringProperty nombreEmpresa, StringProperty direccionEmpresa, IntegerProperty idTutorE, StringProperty nombreTutorE, StringProperty apellidosTutorE, StringProperty telefonoContacto, StringProperty emailTutorE) {
-        IdEmpresa = idEmpresa;
+    public Empresas(IntegerProperty idEmpresa, StringProperty nifEmpresa, StringProperty nombreEmpresa, StringProperty direccionEmpresa,StringProperty tipoEmpresa, IntegerProperty idTutorE, StringProperty nombreTutorE, StringProperty apellidosTutorE, StringProperty telefonoContacto, StringProperty emailTutorE) {
+        this.IdEmpresa = idEmpresa;
         this.nifEmpresa = nifEmpresa;
         this.nombreEmpresa = nombreEmpresa;
         this.direccionEmpresa = direccionEmpresa;
-        IdTutorE = idTutorE;
+        this.tipoEmpresa = tipoEmpresa;
+        this.IdTutorE = idTutorE;
         this.nombreTutorE = nombreTutorE;
         this.apellidosTutorE = apellidosTutorE;
         this.telefonoContacto = telefonoContacto;
         this.emailTutorE = emailTutorE;
+    }
+
+    public Empresas(String nifEmpresa, String nombreEmpresa, String direccionEmpresa, String tipoEmpresa, String nombreTutorE, String apellidosTutorE, String telefonoContacto, String emailTutorE) {
+        this.nifEmpresa.set(nifEmpresa);
+        this.nombreEmpresa.set(nombreEmpresa);
+        this.direccionEmpresa.set(direccionEmpresa);
+        this.tipoEmpresa.set(tipoEmpresa);
+        this.nombreTutorE.set(nombreTutorE);
+        this.apellidosTutorE.set(apellidosTutorE);
+        this.telefonoContacto.set(telefonoContacto);
+        this.emailTutorE.set(emailTutorE);
     }
 
     //Empresas
@@ -85,6 +98,17 @@ public class Empresas {
         this.direccionEmpresa.set(direccionEmpresa);
     }
 
+    public String getTipoEmpresa() {
+        return tipoEmpresa.get();
+    }
+
+    public StringProperty tipoEmpresaProperty() {
+        return tipoEmpresa;
+    }
+
+    public void setTipoEmpresa(String tipoEmpresa) {
+        this.tipoEmpresa.set(tipoEmpresa);
+    }
 
     //TutorEmpresa
 
@@ -147,5 +171,10 @@ public class Empresas {
 
     public void setEmailTutorE(String emailTutorE) {
         this.emailTutorE.set(emailTutorE);
+    }
+
+    @Override
+    public String toString() {
+        return getNifEmpresa() + " - " + getNombreEmpresa();
     }
 }
