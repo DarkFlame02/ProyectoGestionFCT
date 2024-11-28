@@ -1,6 +1,7 @@
 package aed.ui.controller;
 
 import aed.db.alumnos.Alumnos;
+import aed.db.alumnos.crud.Actualizar_Alumnos;
 import aed.db.alumnos.crud.Nombre_Alumno;
 import aed.ui.dialog.BuscarAlumnoDialog;
 import javafx.beans.Observable;
@@ -129,7 +130,33 @@ public class AlumnoController implements Initializable {
 
     @FXML
     void onUpdateAction(ActionEvent event) {
+        if (selectedAlumno.get() != null) {
+            Alumnos alumnoActualizado = selectedAlumno.get();
 
+            alumnoActualizado.setNombreAlumno(nombreText.getText());
+            alumnoActualizado.setApellidosAlumno(apellidosText.getText());
+            alumnoActualizado.setCialAlumno(cialText.getText());
+            alumnoActualizado.setCursoAlumno(cursoText.getText());
+            alumnoActualizado.setNumSSAlumno(numssText.getText());
+
+            Actualizar_Alumnos actualizador = new Actualizar_Alumnos();
+            try {
+                actualizador.actualizarAlumnos(
+                        alumnoActualizado.getIdAlumno(),
+                        alumnoActualizado.getNombreAlumno(),
+                        alumnoActualizado.getApellidosAlumno(),
+                        alumnoActualizado.getCialAlumno(),
+                        alumnoActualizado.getCursoAlumno(),
+                        alumnoActualizado.getNumSSAlumno(),
+                        alumnoActualizado.getIdTutor()
+                );
+                System.out.println("Alumno actualizado correctamente.");
+            } catch (Exception e) {
+                System.err.println("Error al actualizar el alumno: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se ha seleccionado ningún alumno para actualizar.");
+        }
     }
 
     @FXML

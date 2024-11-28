@@ -8,27 +8,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Actualizar_Alumnos {
-
-    public void actualizarAlumnos() {
+    public void actualizarAlumnos(int idAlumno, String nombre, String apellidos, String cial, String curso, String numSS, int idTutor) {
         String query = "UPDATE alumnos SET nombreAlumno = ?, apellidosAlumno = ?, cialAlumno = ?, cursoAlumno = ?, numSSAlumno = ?, IdTutor = ? WHERE idAlumno = ?";
 
         try (Connection conn = ConexionHCP.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            stmt.setString(1, "Pepe");
-            stmt.setString(2,"Pérez");
-            stmt.setString(3,"no tiene");
-            stmt.setString(4,"2Dam");
-            stmt.setString(5, "123456789012");
-            stmt.setString(6, "1");
-            stmt.setInt(7, 1);
+            // Configurar los valores en el PreparedStatement
+            stmt.setString(1, nombre);
+            stmt.setString(2, apellidos);
+            stmt.setString(3, cial);
+            stmt.setString(4, curso);
+            stmt.setString(5, numSS);
+            stmt.setInt(6, idTutor);
+            stmt.setInt(7, idAlumno);
 
+            // Ejecutar la actualización
             int filasActualizadas = stmt.executeUpdate();
-            System.out.println(filasActualizadas+" fila(s) actualizadas(s).");
+            System.out.println(filasActualizadas + " fila(s) actualizada(s).");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 }
+
