@@ -2,6 +2,8 @@ package aed.ui.controller;
 
 import aed.db.comentarios.Comentarios;
 import aed.db.comentarios.crud.Comentarios_Empresa;
+import aed.ui.dialog.BuscarComentariosDialog;
+import aed.ui.dialog.BuscarVisitaDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -118,7 +120,10 @@ public class ComentariosController implements Initializable {
 
     @FXML
     void onSearchAction(ActionEvent event) {
-
+        BuscarComentariosDialog dialog = new BuscarComentariosDialog();
+        dialog.showAndWait().ifPresent(buscar -> {
+            System.out.println(buscar.getIdTutor());
+        });
     }
 
     @FXML

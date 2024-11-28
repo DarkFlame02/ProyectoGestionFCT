@@ -1,6 +1,6 @@
 package aed.ui.dialog;
 
-import aed.db.alumnos.Alumnos;
+import aed.db.practicas.Practicas;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -16,11 +16,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializable {
-
+public class BuscarPracticasDialog extends Dialog<Practicas> implements Initializable {
     // model
 
-    private final StringProperty idAlumno = new SimpleStringProperty();
+    private final StringProperty idPractica = new SimpleStringProperty();
 
     // view
 
@@ -30,7 +29,7 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
     @FXML
     private GridPane root;
 
-    public BuscarAlumnoDialog() {
+    public BuscarPracticasDialog() {
         super();
         // load view
         try {
@@ -46,7 +45,7 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
     public void initialize(URL location, ResourceBundle resources) {
         // init dialog
 
-        setTitle("Buscar alumno");
+        setTitle("Buscar Practica");
         getDialogPane().setContent(root);
         getDialogPane().getButtonTypes().setAll(
                 new ButtonType("Buscar", ButtonBar.ButtonData.OK_DONE),
@@ -56,17 +55,16 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
 
         // bindings
 
-        idAlumno.bind(idText.textProperty());
+        idPractica.bind(idText.textProperty());
 
     }
 
-    private Alumnos onReSult(ButtonType buttonType) {
+    private Practicas onReSult(ButtonType buttonType) {
         if (buttonType.getButtonData() == ButtonBar.ButtonData.OK_DONE) {
-            Alumnos alumno = new Alumnos();
-            alumno.setIdAlumno(Integer.parseInt(idAlumno.get()));
-            return alumno;
+            Practicas practicas = new Practicas();
+            practicas.setIdTutorE(Integer.parseInt(idPractica.get()));
+            return practicas;
         }
         return null;
     }
-
 }

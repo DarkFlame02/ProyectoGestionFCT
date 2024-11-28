@@ -1,6 +1,7 @@
 package aed.ui.dialog;
 
-import aed.db.alumnos.Alumnos;
+import aed.db.empresas.Empresas;
+import aed.db.tutor.Tutor;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -16,11 +17,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializable {
-
+public class BuscarTutorDialog extends Dialog<Tutor> implements Initializable {
     // model
 
-    private final StringProperty idAlumno = new SimpleStringProperty();
+    private final StringProperty idTutor = new SimpleStringProperty();
 
     // view
 
@@ -30,7 +30,7 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
     @FXML
     private GridPane root;
 
-    public BuscarAlumnoDialog() {
+    public BuscarTutorDialog() {
         super();
         // load view
         try {
@@ -46,7 +46,7 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
     public void initialize(URL location, ResourceBundle resources) {
         // init dialog
 
-        setTitle("Buscar alumno");
+        setTitle("Buscar Tutor");
         getDialogPane().setContent(root);
         getDialogPane().getButtonTypes().setAll(
                 new ButtonType("Buscar", ButtonBar.ButtonData.OK_DONE),
@@ -56,17 +56,16 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
 
         // bindings
 
-        idAlumno.bind(idText.textProperty());
+        idTutor.bind(idText.textProperty());
 
     }
 
-    private Alumnos onReSult(ButtonType buttonType) {
+    private Tutor onReSult(ButtonType buttonType) {
         if (buttonType.getButtonData() == ButtonBar.ButtonData.OK_DONE) {
-            Alumnos alumno = new Alumnos();
-            alumno.setIdAlumno(Integer.parseInt(idAlumno.get()));
-            return alumno;
+            Tutor tutor = new Tutor();
+            tutor.setIdTutor(Integer.parseInt(idTutor.get()));
+            return tutor;
         }
         return null;
     }
-
 }

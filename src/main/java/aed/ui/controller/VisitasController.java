@@ -4,6 +4,8 @@ import aed.db.tutor.Tutor;
 import aed.db.tutor.crud.Nombre_Tutor;
 import aed.db.visitas.Visitas;
 import aed.db.visitas.crud.Fecha_Visita;
+import aed.ui.dialog.BuscarTutorDialog;
+import aed.ui.dialog.BuscarVisitaDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -117,7 +119,10 @@ public class VisitasController implements Initializable {
 
     @FXML
     void onSearchAction(ActionEvent event) {
-
+        BuscarVisitaDialog dialog = new BuscarVisitaDialog();
+        dialog.showAndWait().ifPresent(buscar -> {
+            System.out.println(buscar.getIdVisita());
+        });
     }
 
     @FXML

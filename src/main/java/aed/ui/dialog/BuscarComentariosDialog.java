@@ -1,6 +1,6 @@
 package aed.ui.dialog;
 
-import aed.db.alumnos.Alumnos;
+import aed.db.comentarios.Comentarios;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -16,11 +16,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializable {
-
+public class BuscarComentariosDialog extends Dialog<Comentarios> implements Initializable {
     // model
 
-    private final StringProperty idAlumno = new SimpleStringProperty();
+    private final StringProperty idComentarios = new SimpleStringProperty();
 
     // view
 
@@ -30,7 +29,7 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
     @FXML
     private GridPane root;
 
-    public BuscarAlumnoDialog() {
+    public BuscarComentariosDialog() {
         super();
         // load view
         try {
@@ -46,7 +45,7 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
     public void initialize(URL location, ResourceBundle resources) {
         // init dialog
 
-        setTitle("Buscar alumno");
+        setTitle("Buscar Practica");
         getDialogPane().setContent(root);
         getDialogPane().getButtonTypes().setAll(
                 new ButtonType("Buscar", ButtonBar.ButtonData.OK_DONE),
@@ -56,17 +55,16 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
 
         // bindings
 
-        idAlumno.bind(idText.textProperty());
+        idComentarios.bind(idText.textProperty());
 
     }
 
-    private Alumnos onReSult(ButtonType buttonType) {
+    private Comentarios onReSult(ButtonType buttonType) {
         if (buttonType.getButtonData() == ButtonBar.ButtonData.OK_DONE) {
-            Alumnos alumno = new Alumnos();
-            alumno.setIdAlumno(Integer.parseInt(idAlumno.get()));
-            return alumno;
+            Comentarios comentarios = new Comentarios();
+            comentarios.setIdTutor(Integer.parseInt(idComentarios.get()));
+            return comentarios;
         }
         return null;
     }
-
 }

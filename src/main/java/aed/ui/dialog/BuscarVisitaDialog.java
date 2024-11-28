@@ -1,6 +1,7 @@
 package aed.ui.dialog;
 
-import aed.db.alumnos.Alumnos;
+import aed.db.practicas.Practicas;
+import aed.db.visitas.Visitas;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -16,11 +17,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializable {
-
+public class BuscarVisitaDialog  extends Dialog<Visitas> implements Initializable {
     // model
 
-    private final StringProperty idAlumno = new SimpleStringProperty();
+    private final StringProperty idVisita = new SimpleStringProperty();
 
     // view
 
@@ -30,7 +30,7 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
     @FXML
     private GridPane root;
 
-    public BuscarAlumnoDialog() {
+    public BuscarVisitaDialog() {
         super();
         // load view
         try {
@@ -46,7 +46,7 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
     public void initialize(URL location, ResourceBundle resources) {
         // init dialog
 
-        setTitle("Buscar alumno");
+        setTitle("Buscar Practica");
         getDialogPane().setContent(root);
         getDialogPane().getButtonTypes().setAll(
                 new ButtonType("Buscar", ButtonBar.ButtonData.OK_DONE),
@@ -56,17 +56,17 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
 
         // bindings
 
-        idAlumno.bind(idText.textProperty());
+        idVisita.bind(idText.textProperty());
 
     }
 
-    private Alumnos onReSult(ButtonType buttonType) {
+    private Visitas onReSult(ButtonType buttonType) {
         if (buttonType.getButtonData() == ButtonBar.ButtonData.OK_DONE) {
-            Alumnos alumno = new Alumnos();
-            alumno.setIdAlumno(Integer.parseInt(idAlumno.get()));
-            return alumno;
+            Visitas visitas = new Visitas();
+            visitas.setIdVisita(Integer.parseInt(idVisita.get()));
+            return visitas;
         }
         return null;
     }
-
 }
+

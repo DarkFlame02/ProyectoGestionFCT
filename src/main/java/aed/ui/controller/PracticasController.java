@@ -3,6 +3,8 @@ package aed.ui.controller;
 
 import aed.db.practicas.Practicas;
 import aed.db.practicas.crud.Practicas_Empresa;
+import aed.ui.dialog.BuscarPracticasDialog;
+import aed.ui.dialog.BuscarVisitaDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -112,7 +114,10 @@ public class PracticasController implements Initializable {
 
     @FXML
     void onSearchAction(ActionEvent event) {
-
+        BuscarPracticasDialog dialog = new BuscarPracticasDialog();
+        dialog.showAndWait().ifPresent(buscar -> {
+            System.out.println(buscar.getIdTutorE());
+        });
     }
 
     @FXML

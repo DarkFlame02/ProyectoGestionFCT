@@ -2,6 +2,8 @@ package aed.ui.controller;
 
 import aed.db.empresas.Empresas;
 import aed.db.empresas.crud.Nombre_Empresa;
+import aed.ui.dialog.BuscarAlumnoDialog;
+import aed.ui.dialog.BuscarEmpresaDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -143,7 +145,10 @@ public class EmpresaController implements Initializable {
 
     @FXML
     void onSearchAction(ActionEvent event) {
-
+        BuscarEmpresaDialog dialog = new BuscarEmpresaDialog();
+        dialog.showAndWait().ifPresent(buscar -> {
+            System.out.println(buscar.getIdEmpresa());
+        });
     }
 
     @FXML
