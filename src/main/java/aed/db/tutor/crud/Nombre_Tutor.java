@@ -15,17 +15,18 @@ public class Nombre_Tutor {
     public static ObservableList<Tutor> listarTutores() {
 
         ObservableList<Tutor> listaTutores = FXCollections.observableArrayList();
-        String query = "SELECT nombreTutor, apellidosTutor, emailTutor FROM tutor;";
+        String query = "SELECT idTutor, nombreTutor, apellidosTutor, emailTutor FROM tutor;";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
+                int idTutor = rs.getInt("idTutor");
                 String nombreTutor = rs.getString("nombreTutor");
                 String apellidosTutor = rs.getString("apellidosTutor");
                 String emailTutor = rs.getString("emailTutor");
-                Tutor tutores = new Tutor(nombreTutor, apellidosTutor, emailTutor);
+                Tutor tutores = new Tutor(idTutor, nombreTutor, apellidosTutor, emailTutor);
                 listaTutores.add(tutores);
             }
         } catch (SQLException e) {

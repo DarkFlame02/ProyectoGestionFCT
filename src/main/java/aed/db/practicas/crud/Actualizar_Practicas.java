@@ -9,17 +9,17 @@ import java.sql.SQLException;
 
 public class Actualizar_Practicas {
 
-    public void actualizarPracticas() {
-        String query = "UPDATE asignacion SET IdAlumno = ?, IdTutorE = ? WHERE IdAlumno = ? AND IdTutorE = ?";
+    public void actualizarPracticas(int idAlumno, int idTutorE, int idAlumnoOld, int idTutorEOld) {
+        String query = "UPDATE asignacion SET idAlumno = ?, idTutorE = ? WHERE idAlumno = ? AND idTutorE = ?";
 
         try (Connection conn = ConexionHCP.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            stmt.setInt(1, 2); //IdAlumno Mod
-            stmt.setInt(2, 2); //IdTutorE Mod
-            stmt.setInt(3, 1); //IdAlumno OG
-            stmt.setInt(4, 1); //IdTutorE OG
+
+            stmt.setInt(1, idAlumno); //IdAlumno Mod
+            stmt.setInt(2, idTutorE); //IdTutorE Mod
+            stmt.setInt(3, idAlumnoOld); //IdAlumno OG
+            stmt.setInt(4, idTutorEOld); //IdTutorE OG
 
             int filasActualizadas = stmt.executeUpdate();
             System.out.println(filasActualizadas+" fila(s) actualizadas(s).");

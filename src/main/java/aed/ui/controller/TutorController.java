@@ -1,8 +1,11 @@
 package aed.ui.controller;
 
+import aed.db.comentarios.Comentarios;
+import aed.db.comentarios.crud.Actualizar_Comentarios;
 import aed.db.practicas.Practicas;
 import aed.db.practicas.crud.Practicas_Empresa;
 import aed.db.tutor.Tutor;
+import aed.db.tutor.crud.Actualizar_Tutor;
 import aed.db.tutor.crud.Nombre_Tutor;
 import aed.ui.dialog.BuscarAlumnoDialog;
 import aed.ui.dialog.BuscarTutorDialog;
@@ -36,7 +39,7 @@ public class TutorController implements Initializable {
                     tutor -> new Observable[] { tutor.nombreTutorProperty() } // indicamos que properties de cada bean son observables dentro de la lista
             )
     );
-    private final ObjectProperty<Tutor> selectedComentario = new SimpleObjectProperty<>();
+    private final ObjectProperty<Tutor> selectedTutor = new SimpleObjectProperty<>();
 
     // view
 
@@ -81,7 +84,7 @@ public class TutorController implements Initializable {
             }
         });
 
-        selectedComentario.bind(tutorList.getSelectionModel().selectedItemProperty());
+        selectedTutor.bind(tutorList.getSelectionModel().selectedItemProperty());
         tutor.addListener(this::onTutorChanged);
     }
 
@@ -128,6 +131,29 @@ public class TutorController implements Initializable {
 
     @FXML
     void onUpdateAction(ActionEvent event) {
+        if (selectedTutor.get() != null) {
+            Tutor tutorActualizado = selectedTutor.get();
 
+            tutorActualizado.setNombreTutor(nombreText.getText());
+            tutorActualizado.setApellidosTutor(apellidosText.getText());
+            tutorActualizado.setEmailTutor(emailText.getText());
+
+
+            Actualizar_Tutor actualizador = new Actualizar_Tutor();
+            try {
+                actualizador.actualizarTutor(
+                        tutorActualizado.getIdTutor(),
+                        tutorActualizado.getNombreTutor(),
+                        tutorActualizado.getApellidosTutor(),
+                        tutorActualizado.getEmailTutor()
+
+                );
+                System.out.println("Comentario actualizado correctamente.");
+            } catch (Exception e) {
+                System.err.println("Error al actualizar el alumno: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se ha seleccionado ningún comentario para actualizar.");
+        }
     }
 }

@@ -1,7 +1,10 @@
 package aed.ui.controller;
 
 
+import aed.db.comentarios.Comentarios;
+import aed.db.comentarios.crud.Actualizar_Comentarios;
 import aed.db.practicas.Practicas;
+import aed.db.practicas.crud.Actualizar_Practicas;
 import aed.db.practicas.crud.Practicas_Empresa;
 import aed.ui.dialog.BuscarPracticasDialog;
 import aed.ui.dialog.BuscarVisitaDialog;
@@ -35,9 +38,15 @@ public class PracticasController implements Initializable {
                     practica -> new Observable[] { practica.nombreAlumnoProperty() } // indicamos que properties de cada bean son observables dentro de la lista
             )
     );
-    private final ObjectProperty<Practicas> selectedComentario = new SimpleObjectProperty<>();
+    private final ObjectProperty<Practicas> selectedPractica = new SimpleObjectProperty<>();
 
     // view
+
+    @FXML
+    private TextField idAlumnoText;
+
+    @FXML
+    private TextField idTutorEText;
 
     @FXML
     private TextField nombreAlumnoText;
@@ -77,19 +86,26 @@ public class PracticasController implements Initializable {
             }
         });
 
-        selectedComentario.bind(practicaList.getSelectionModel().selectedItemProperty());
+        nombreAlumnoText.setDisable(true);
+        nombreTutorEText.setDisable(true);
+
+        selectedPractica.bind(practicaList.getSelectionModel().selectedItemProperty());
         practica.addListener(this::onPracticaChanged);
     }
 
     private void onPracticaChanged(ObservableValue<? extends Practicas> o, Practicas oldValue, Practicas newValue) {
         if (oldValue != null) {
+            oldValue.setIdAlumno(Integer.parseInt(idAlumnoText.getText()));
             oldValue.setNombreAlumno(nombreAlumnoText.getText());
+            oldValue.setIdTutorE(Integer.parseInt(idTutorEText.getText()));
             oldValue.setNombreTutorE(nombreTutorEText.getText());
         }
 
         if (newValue != null) {
+            idAlumnoText.setText(String.valueOf(newValue.getIdAlumno()));
             nombreAlumnoText.setText(newValue.getNombreAlumno());
-            nombreTutorEText.setText(String.valueOf(newValue.getNombreTutorE()));
+            idTutorEText.setText(String.valueOf(newValue.getIdTutorE()));
+            nombreTutorEText.setText(newValue.getNombreTutorE());
         }
     }
 
@@ -122,6 +138,27 @@ public class PracticasController implements Initializable {
 
     @FXML
     void onUpdateAction(ActionEvent event) {
+        if (selectedPractica.get() != null) {
+            Practicas practicaActualizada = selectedPractica.get();
 
+            practicaActualizada.setIdAlumno(Integer.parseInt(idAlumnoText.getText()));
+            practicaActualizada.setIdTutorE(Integer.parseInt(idTutorEText.getText()));
+
+
+            Actualizar_Practicas actualizador = new Actualizar_Practicas();
+            try {
+                actualizador.actualizarPracticas(
+                        practicaActualizada.getIdAlumno(),
+                        practicaActualizada.getIdTutorE(),
+                        practicaActualizada.getIdAlumno(),
+                        practicaActualizada.getIdTutorE()
+                        );
+                System.out.println("Comentario actualizado correctamente.");
+            } catch (Exception e) {
+                System.err.println("Error al actualizar el alumno: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se ha seleccionado ningún comentario para actualizar.");
+        }
     }
 }
