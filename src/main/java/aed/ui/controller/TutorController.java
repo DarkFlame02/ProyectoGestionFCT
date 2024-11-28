@@ -148,12 +148,12 @@ public class TutorController implements Initializable {
                         tutorActualizado.getEmailTutor()
 
                 );
-                System.out.println("Comentario actualizado correctamente.");
+                System.out.println("Tutor actualizado correctamente.");
             } catch (Exception e) {
-                System.err.println("Error al actualizar el alumno: " + e.getMessage());
+                System.err.println("Error al actualizar el tutor: " + e.getMessage());
             }
         } else {
-            System.out.println("No se ha seleccionado ningún comentario para actualizar.");
+            System.out.println("No se ha seleccionado ningún tutor para actualizar.");
         }
     }
 }

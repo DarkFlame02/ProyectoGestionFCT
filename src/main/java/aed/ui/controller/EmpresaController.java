@@ -184,7 +184,7 @@ public class EmpresaController implements Initializable {
                 );
                 System.out.println("Empresa actualizado correctamente.");
             } catch (Exception e) {
-                System.err.println("Error al actualizar el alumno: " + e.getMessage());
+                System.err.println("Error al actualizar el empresa: " + e.getMessage());
             }
         } else {
             System.out.println("No se ha seleccionado ningún empresa para actualizar.");

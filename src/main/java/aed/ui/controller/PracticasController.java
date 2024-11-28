@@ -138,27 +138,27 @@ public class PracticasController implements Initializable {
 
     @FXML
     void onUpdateAction(ActionEvent event) {
-        if (selectedPractica.get() != null) {
-            Practicas practicaActualizada = selectedPractica.get();
-
-            practicaActualizada.setIdAlumno(Integer.parseInt(idAlumnoText.getText()));
-            practicaActualizada.setIdTutorE(Integer.parseInt(idTutorEText.getText()));
-
-
-            Actualizar_Practicas actualizador = new Actualizar_Practicas();
-            try {
-                actualizador.actualizarPracticas(
-                        practicaActualizada.getIdAlumno(),
-                        practicaActualizada.getIdTutorE(),
-                        practicaActualizada.getIdAlumno(),
-                        practicaActualizada.getIdTutorE()
-                        );
-                System.out.println("Comentario actualizado correctamente.");
-            } catch (Exception e) {
-                System.err.println("Error al actualizar el alumno: " + e.getMessage());
-            }
-        } else {
-            System.out.println("No se ha seleccionado ningún comentario para actualizar.");
-        }
+//        if (selectedPractica.get() != null) {
+//            Practicas practicaActualizada = selectedPractica.get();
+//
+//            practicaActualizada.setIdAlumno(Integer.parseInt(idAlumnoText.getText()));
+//            practicaActualizada.setIdTutorE(Integer.parseInt(idTutorEText.getText()));
+//
+//
+//            Actualizar_Practicas actualizador = new Actualizar_Practicas();
+//            try {
+//                actualizador.actualizarPracticas(
+//                        practicaActualizada.getIdAlumno(),
+//                        practicaActualizada.getIdTutorE(),
+//                        practicaActualizada.getIdAlumno(),
+//                        practicaActualizada.getIdTutorE()
+//                        );
+//                System.out.println("Practicas actualizado correctamente.");
+//            } catch (Exception e) {
+//                System.err.println("Error al actualizar el practicas: " + e.getMessage());
+//            }
+//        } else {
+//            System.out.println("No se ha seleccionado ningún practica para actualizar.");
+//        }
     }
 }

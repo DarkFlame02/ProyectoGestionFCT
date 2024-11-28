@@ -147,7 +147,7 @@ public class ComentariosController implements Initializable {
                 );
                 System.out.println("Comentario actualizado correctamente.");
             } catch (Exception e) {
-                System.err.println("Error al actualizar el alumno: " + e.getMessage());
+                System.err.println("Error al actualizar el comentario: " + e.getMessage());
             }
         } else {
             System.out.println("No se ha seleccionado ningún comentario para actualizar.");
