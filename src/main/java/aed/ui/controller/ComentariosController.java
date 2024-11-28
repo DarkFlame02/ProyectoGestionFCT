@@ -1,6 +1,9 @@
 package aed.ui.controller;
 
+import aed.db.alumnos.Alumnos;
+import aed.db.alumnos.crud.Actualizar_Alumnos;
 import aed.db.comentarios.Comentarios;
+import aed.db.comentarios.crud.Actualizar_Comentarios;
 import aed.db.comentarios.crud.Comentarios_Empresa;
 import aed.ui.dialog.BuscarComentariosDialog;
 import aed.ui.dialog.BuscarVisitaDialog;
@@ -128,6 +131,26 @@ public class ComentariosController implements Initializable {
 
     @FXML
     void onUpdateAction(ActionEvent event) {
+        if (selectedComentario.get() != null) {
+            Comentarios comentarioActualizado = selectedComentario.get();
 
+            comentarioActualizado.setComentario(comentarioText.getText());
+
+
+            Actualizar_Comentarios actualizador = new Actualizar_Comentarios();
+            try {
+                actualizador.actualizarComentarios(
+                        comentarioActualizado.getIdEmpresa(),
+                        comentarioActualizado.getIdTutor(),
+                        comentarioActualizado.getComentario()
+
+                );
+                System.out.println("Comentario actualizado correctamente.");
+            } catch (Exception e) {
+                System.err.println("Error al actualizar el alumno: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se ha seleccionado ningún comentario para actualizar.");
+        }
     }
 }

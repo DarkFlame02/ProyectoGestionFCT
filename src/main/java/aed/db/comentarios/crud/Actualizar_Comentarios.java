@@ -9,16 +9,15 @@ import java.sql.SQLException;
 
 public class Actualizar_Comentarios {
 
-    public void actualizarComentarios() {
+    public void actualizarComentarios(int idEmpresa, int idTutor, String comentario) {
         String query = "UPDATE comentarioscaptacion SET comentario = ? WHERE IdTutor = ? AND IdEmpresa = ?";
 
         try (Connection conn = ConexionHCP.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(query)){
 
-            stmt.setString(1, "Mu bien");
-            stmt.setInt(2, 1);
-            stmt.setInt(3, 1);
+            stmt.setString(1, comentario);
+            stmt.setInt(2, idTutor);
+            stmt.setInt(3, idEmpresa);
 
             int filasActualizadas = stmt.executeUpdate();
             System.out.println(filasActualizadas+" fila(s) actualizadas(s).");
