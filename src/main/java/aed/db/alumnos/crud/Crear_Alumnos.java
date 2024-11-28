@@ -9,19 +9,19 @@ import java.sql.SQLException;
 
 public class Crear_Alumnos {
 
-    public void registrarAlumnos() {
-        String query = "INSERT INTO alumnos(nombreAlumno, apellidosAlumno, cialAlumno, cursoAlumno, numSSAlumno, IdTutor) VALUES(?, ?, ?, ?, ?, ?)";
+    public void registrarAlumnos(String nombreAlumno, String apellidosAlumno, String cialAlumno, String cursoAlumno, String numSSAlumno, int IdTutor) {
+        String query = "INSERT INTO alumnos(nombreAlumno, apellidosAlumno, cialAlumno, cursoAlumno, numSSAlumno, idTutor) VALUES(?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
-            stmt.setString(1, "Pepe");
-            stmt.setString(2,"Pérez");
-            stmt.setString(3,"no tiene");
-            stmt.setString(4,"2Dam");
-            stmt.setString(5, "123456789012");
-            stmt.setString(6, "1");
+            stmt.setString(1, nombreAlumno);
+            stmt.setString(2,apellidosAlumno);
+            stmt.setString(3,cialAlumno);
+            stmt.setString(4, cursoAlumno);
+            stmt.setString(5, numSSAlumno);
+            stmt.setInt(6, IdTutor);
 
             int filasCreadas = stmt.executeUpdate();
             System.out.println(filasCreadas+" fila(s) creadas(s).");
