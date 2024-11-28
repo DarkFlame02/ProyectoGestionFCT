@@ -15,7 +15,7 @@ public class Nombre_Empresa {
     public static ObservableList<Empresas> listarEmpresas() {
 
         ObservableList<Empresas> listaEmpresas = FXCollections.observableArrayList();
-        String query = "SELECT e.nifEmpresa , e.nombreEmpresa, e.direccionEmpresa, e.tipoEmpresa, t.nombreTutorE, " +
+        String query = "SELECT e.idEmpresa, e.nifEmpresa , e.nombreEmpresa, e.direccionEmpresa, e.tipoEmpresa, t.nombreTutorE, " +
                 "t.apellidosTutorE, t.telefonoContacto, t.emailTutorE FROM empresa e JOIN tutorempresa t " +
                 "on e.idEmpresa=t.idEmpresa";
 
@@ -24,6 +24,7 @@ public class Nombre_Empresa {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
+                int idEmpresa = rs.getInt("idEmpresa");
                 String nifEmpresa = rs.getString("nifEmpresa");
                 String nombreEmpresa = rs.getString("nombreEmpresa");
                 String direccionEmpresa = rs.getString("direccionEmpresa");
@@ -32,7 +33,7 @@ public class Nombre_Empresa {
                 String apellidosTutorE = rs.getString("apellidosTutorE");
                 String telefonoContacto = rs.getString("telefonoContacto");
                 String emailTutorE = rs.getString("emailTutorE");
-                Empresas empresa = new Empresas(nifEmpresa, nombreEmpresa, direccionEmpresa, tipoEmpresa, nombreTutorE, apellidosTutorE, telefonoContacto, emailTutorE);
+                Empresas empresa = new Empresas(idEmpresa, nifEmpresa, nombreEmpresa, direccionEmpresa, tipoEmpresa, nombreTutorE, apellidosTutorE, telefonoContacto, emailTutorE);
                 listaEmpresas.add(empresa);
             }
         } catch (SQLException e) {

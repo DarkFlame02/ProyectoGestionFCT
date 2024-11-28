@@ -37,7 +37,8 @@ public class Empresas {
         this.emailTutorE = emailTutorE;
     }
 
-    public Empresas(String nifEmpresa, String nombreEmpresa, String direccionEmpresa, String tipoEmpresa, String nombreTutorE, String apellidosTutorE, String telefonoContacto, String emailTutorE) {
+    public Empresas(int idEmpresa, String nifEmpresa, String nombreEmpresa, String direccionEmpresa, String tipoEmpresa, String nombreTutorE, String apellidosTutorE, String telefonoContacto, String emailTutorE) {
+        this.IdEmpresa.set(idEmpresa);
         this.nifEmpresa.set(nifEmpresa);
         this.nombreEmpresa.set(nombreEmpresa);
         this.direccionEmpresa.set(direccionEmpresa);

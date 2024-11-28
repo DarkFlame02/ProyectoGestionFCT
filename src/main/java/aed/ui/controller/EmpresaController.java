@@ -1,6 +1,9 @@
 package aed.ui.controller;
 
+import aed.db.comentarios.Comentarios;
+import aed.db.comentarios.crud.Actualizar_Comentarios;
 import aed.db.empresas.Empresas;
+import aed.db.empresas.crud.Actualizar_Empresas;
 import aed.db.empresas.crud.Nombre_Empresa;
 import aed.ui.dialog.BuscarAlumnoDialog;
 import aed.ui.dialog.BuscarEmpresaDialog;
@@ -153,6 +156,39 @@ public class EmpresaController implements Initializable {
 
     @FXML
     void onUpdateAction(ActionEvent event) {
+        if (selectedEmpresa.get() != null) {
+            Empresas empresaActualizada = selectedEmpresa.get();
+
+            empresaActualizada.setNifEmpresa(nifText.getText());
+            empresaActualizada.setNombreEmpresa(nombreEmpresaText.getText());
+            empresaActualizada.setDireccionEmpresa(direccionEmpresaText.getText());
+            empresaActualizada.setTipoEmpresa(tipoEmpresaText.getText());
+            empresaActualizada.setNombreTutorE(nombreTutorEText.getText());
+            empresaActualizada.setApellidosTutorE(apellidosTutorEtext.getText());
+            empresaActualizada.setTelefonoContacto(telefonoTutorEText.getText());
+            empresaActualizada.setEmailTutorE(emailTutorEtext.getText());
+
+            Actualizar_Empresas actualizador = new Actualizar_Empresas();
+            try {
+                actualizador.actualizarEmpresas(
+                        empresaActualizada.getNifEmpresa(),
+                        empresaActualizada.getNombreEmpresa(),
+                        empresaActualizada.getDireccionEmpresa(),
+                        empresaActualizada.getTipoEmpresa(),
+                        empresaActualizada.getNombreTutorE(),
+                        empresaActualizada.getApellidosTutorE(),
+                        empresaActualizada.getTelefonoContacto(),
+                        empresaActualizada.getEmailTutorE(),
+                        empresaActualizada.getIdEmpresa()
+
+                );
+                System.out.println("Empresa actualizado correctamente.");
+            } catch (Exception e) {
+                System.err.println("Error al actualizar el alumno: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se ha seleccionado ningún empresa para actualizar.");
+        }
 
     }
 
