@@ -26,12 +26,14 @@ public class Alumnos {
 
     public Alumnos() {}
 
-    public Alumnos(String nombre, String apellidos, String cial, String curso, String numSS) {
+    public Alumnos(int id, String nombre, String apellidos, String cial, String curso, String numSS, int idTutor) {
+        this.IdAlumno.set(id);
         this.nombreAlumno.set(nombre);
         this.apellidosAlumno.set(apellidos);
         this.cialAlumno.set(cial);
         this.cursoAlumno.set(curso);
         this.numSSAlumno.set(numSS);
+        this.idTutor.set(idTutor);
     }
 
     public int getIdAlumno() {
