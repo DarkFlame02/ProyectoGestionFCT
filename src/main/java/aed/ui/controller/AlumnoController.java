@@ -2,6 +2,7 @@ package aed.ui.controller;
 
 import aed.db.alumnos.Alumnos;
 import aed.db.alumnos.crud.Actualizar_Alumnos;
+import aed.db.alumnos.crud.Borrar_Alumnos;
 import aed.db.alumnos.crud.Nombre_Alumno;
 import aed.ui.dialog.BuscarAlumnoDialog;
 import javafx.beans.Observable;
@@ -125,7 +126,31 @@ public class AlumnoController implements Initializable {
 
     @FXML
     void onDeleteAction(ActionEvent event) {
+        if (selectedAlumno.get() != null) {
+            Alumnos alumnoBorrado = selectedAlumno.get();
 
+            alumnoBorrado.setCialAlumno(cialText.getText());
+
+            Borrar_Alumnos borrador = new Borrar_Alumnos();
+            try {
+                borrador.borrarAlumnos(
+                        alumnoBorrado.getCialAlumno()
+                );
+                System.out.println("Alumno borrado correctamente.");
+
+                alumnos.remove(alumnoBorrado);
+
+                nombreText.clear();
+                apellidosText.clear();
+                cialText.clear();
+                cursoText.clear();
+                numssText.clear();
+            } catch (Exception e) {
+                System.err.println("Error al borrar el alumno: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se ha seleccionado ningún alumno para borrar.");
+        }
     }
 
     @FXML
