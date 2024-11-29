@@ -1,7 +1,10 @@
 package aed.ui.controller;
 
+import aed.db.comentarios.Comentarios;
+import aed.db.comentarios.crud.Borrar_Comentarios;
 import aed.db.empresas.Empresas;
 import aed.db.empresas.crud.Actualizar_Empresas;
+import aed.db.empresas.crud.Borrar_Empresas;
 import aed.db.empresas.crud.Nombre_Empresa;
 import aed.ui.dialog.BuscarEmpresaDialog;
 import javafx.beans.Observable;
@@ -103,15 +106,21 @@ public class EmpresaController implements Initializable {
 
     private void onEmpresaChanged(ObservableValue<? extends Empresas> o, Empresas oldValue, Empresas newValue) {
         if (oldValue != null) {
-            oldValue.setIdEmpresa(Integer.parseInt(idEmpresaText.getText()));
-            oldValue.setNifEmpresa(nifText.getText());
-            oldValue.setNombreEmpresa(nombreEmpresaText.getText());
-            oldValue.setDireccionEmpresa(direccionEmpresaText.getText());
-            oldValue.setTipoEmpresa(tipoEmpresaText.getText());
-            oldValue.setNombreTutorE(nombreTutorEText.getText());
-            oldValue.setApellidosTutorE(apellidosTutorEtext.getText());
-            oldValue.setTelefonoContacto(telefonoTutorEText.getText());
-            oldValue.setEmailTutorE(emailTutorEtext.getText());
+            try {
+                if (!idEmpresaText.getText().isEmpty()) {
+                    oldValue.setIdEmpresa(Integer.parseInt(idEmpresaText.getText()));
+                }
+                oldValue.setNifEmpresa(nifText.getText());
+                oldValue.setNombreEmpresa(nombreEmpresaText.getText());
+                oldValue.setDireccionEmpresa(direccionEmpresaText.getText());
+                oldValue.setTipoEmpresa(tipoEmpresaText.getText());
+                oldValue.setNombreTutorE(nombreTutorEText.getText());
+                oldValue.setApellidosTutorE(apellidosTutorEtext.getText());
+                oldValue.setTelefonoContacto(telefonoTutorEText.getText());
+                oldValue.setEmailTutorE(emailTutorEtext.getText());
+            } catch (NumberFormatException e) {
+                System.err.println("Error al convertir campos numéricos: " + e.getMessage());
+            }
         }
 
         if (newValue != null) {
@@ -133,6 +142,11 @@ public class EmpresaController implements Initializable {
     }
 
     @FXML
+    void onNewAction(ActionEvent event) {
+
+    }
+
+    @FXML
     void onAddAction(ActionEvent event) {
 
     }
@@ -144,7 +158,34 @@ public class EmpresaController implements Initializable {
 
     @FXML
     void onDeleteAction(ActionEvent event) {
+        if (selectedEmpresa.get() != null) {
+            Empresas empresaBorrada = selectedEmpresa.get();
 
+            Borrar_Empresas borrador = new Borrar_Empresas();
+            try {
+                borrador.borrarEmpresa(
+                        empresaBorrada.getIdEmpresa()
+                );
+                System.out.println("Empresa borrado correctamente.");
+
+                empresas.remove(empresaBorrada);
+
+                idEmpresaText.clear();
+                nombreEmpresaText.clear();
+                nifText.clear();
+                direccionEmpresaText.clear();
+                tipoEmpresaText.clear();
+                nombreTutorEText.clear();
+                apellidosTutorEtext.clear();
+                telefonoTutorEText.clear();
+                emailTutorEtext.clear();
+
+            } catch (Exception e) {
+                System.err.println("Error al borrar el empresa: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se ha seleccionado ningún empresa para borrar.");
+        }
     }
 
     @FXML
