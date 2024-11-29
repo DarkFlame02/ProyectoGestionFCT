@@ -34,9 +34,9 @@
                   <Label text="ID tutor empresa:" GridPane.rowIndex="2" />
                       <Label text="Nombre tutor empresa:" GridPane.rowIndex="3" />
                   <TextField fx:id="idAlumnoText" GridPane.columnIndex="1" />
-                      <TextField fx:id="nombreAlumnoText" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                      <TextField fx:id="nombreAlumnoText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="idTutorEText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="nombreTutorEText" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="nombreTutorEText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   </children>
                   <padding>
                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
