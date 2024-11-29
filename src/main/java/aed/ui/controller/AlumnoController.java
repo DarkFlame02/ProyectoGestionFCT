@@ -130,19 +130,12 @@ public class AlumnoController implements Initializable {
     @FXML
     void onAddAction(ActionEvent event) {
 
-//        idText.clear();
-//        nombreText.clear();
-//        apellidosText.clear();
-//        cialText.clear();
-//        cursoText.clear();
-//        numssText.clear();
-//        idTutorText.clear();
-
-        if (!(nombreText.getText().isEmpty() || apellidosText.getText().isEmpty() ||
+        if (nombreText.getText().isEmpty() || apellidosText.getText().isEmpty() ||
                 cialText.getText().isEmpty() || cursoText.getText().isEmpty() ||
-                numssText.getText().isEmpty())) {
+                numssText.getText().isEmpty()) {
 
             System.out.println("Todos los campos deben estar completos.");
+            return;
         }
 
         Alumnos nuevoAlumno = new Alumnos();
@@ -166,7 +159,7 @@ public class AlumnoController implements Initializable {
             System.out.println("Alumno agregado correctamente.");
 
             alumnos.add(nuevoAlumno);
-            alumnos.remove(newAlumno); //Se puede mejorar
+            alumnos.remove(newAlumno); //Está hecho un poco a lo matao.
 
             nombreText.clear();
             apellidosText.clear();
