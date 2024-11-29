@@ -20,12 +20,12 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
 
     // model
 
-    private final StringProperty cialAlumno = new SimpleStringProperty();
+    private final StringProperty idAlumno = new SimpleStringProperty();
 
     // view
 
     @FXML
-    private TextField cialText;
+    private TextField idText;
 
     @FXML
     private GridPane root;
@@ -56,14 +56,14 @@ public class BuscarAlumnoDialog extends Dialog<Alumnos>  implements Initializabl
 
         // bindings
 
-        cialAlumno.bind(cialText.textProperty());
+        idAlumno.bind(idText.textProperty());
 
     }
 
     private Alumnos onReSult(ButtonType buttonType) {
         if (buttonType.getButtonData() == ButtonBar.ButtonData.OK_DONE) {
             Alumnos alumno = new Alumnos();
-            alumno.setIdAlumno(Integer.parseInt(cialAlumno.get()));
+            alumno.setIdAlumno(Integer.parseInt(idAlumno.get()));
             return alumno;
         }
         return null;
