@@ -29,7 +29,7 @@ public class Comentarios {
         this.comentario.set(comentarios);
     }
 
-    public int getIdEmpresa() {
+    public Integer getIdEmpresa() {
         return idEmpresa.get();
     }
 

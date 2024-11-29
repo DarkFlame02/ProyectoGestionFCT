@@ -2,8 +2,10 @@ package aed.ui.controller;
 
 import aed.db.alumnos.Alumnos;
 import aed.db.alumnos.crud.Actualizar_Alumnos;
+import aed.db.alumnos.crud.Borrar_Alumnos;
 import aed.db.comentarios.Comentarios;
 import aed.db.comentarios.crud.Actualizar_Comentarios;
+import aed.db.comentarios.crud.Borrar_Comentarios;
 import aed.db.comentarios.crud.Comentarios_Empresa;
 import aed.ui.dialog.BuscarComentariosDialog;
 import aed.ui.dialog.BuscarVisitaDialog;
@@ -44,6 +46,9 @@ public class ComentariosController implements Initializable {
 
     @FXML
     private TextArea comentarioText;
+
+    @FXML
+    private TextField idEmpresaText;
 
     @FXML
     private ListView<Comentarios> comentarioList;
@@ -89,18 +94,34 @@ public class ComentariosController implements Initializable {
 
     private void onComentarioChanged(ObservableValue<? extends Comentarios> o, Comentarios oldValue, Comentarios newValue) {
         if (oldValue != null) {
-            oldValue.setNombreEmpresa(empresaText.getText());
-            oldValue.setIdTutor(Integer.parseInt(tutorText.getText()));
-            oldValue.setComentario(comentarioText.getText());
-
+            try {
+                if (!idEmpresaText.getText().isEmpty()) {
+                    oldValue.setIdEmpresa(Integer.parseInt(idEmpresaText.getText()));
+                }
+                oldValue.setNombreEmpresa(empresaText.getText());
+                if (!tutorText.getText().isEmpty()) {
+                    oldValue.setIdTutor(Integer.parseInt(tutorText.getText()));
+                }
+                oldValue.setComentario(comentarioText.getText());
+            } catch (NumberFormatException e) {
+                System.err.println("Error al actualizar oldValue: " + e.getMessage());
+            }
         }
 
         if (newValue != null) {
+            idEmpresaText.setText(String.valueOf(newValue.getIdEmpresa()));
             empresaText.setText(newValue.getNombreEmpresa());
             tutorText.setText(String.valueOf(newValue.getIdTutor()));
             comentarioText.setText(newValue.getComentario());
+        } else {
+            // Limpia los campos si no hay un comentario seleccionado
+            idEmpresaText.clear();
+            empresaText.clear();
+            tutorText.clear();
+            comentarioText.clear();
         }
     }
+
 
     public BorderPane getRoot() {
         return root;
@@ -118,7 +139,29 @@ public class ComentariosController implements Initializable {
 
     @FXML
     void onDeleteAction(ActionEvent event) {
+        if (selectedComentario.get() != null) {
+            Comentarios comentarioBorrado = selectedComentario.get();
 
+            Borrar_Comentarios borrador = new Borrar_Comentarios();
+            try {
+                borrador.borrarComentario(
+                        comentarioBorrado.getIdEmpresa()
+                );
+                System.out.println("Comentario borrado correctamente.");
+
+                comentarios.remove(comentarioBorrado);
+
+                idEmpresaText.clear();
+                empresaText.clear();
+                tutorText.clear();
+                comentarioText.clear();
+
+            } catch (Exception e) {
+                System.err.println("Error al borrar el comentario: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se ha seleccionado ningún comentario para borrar.");
+        }
     }
 
     @FXML

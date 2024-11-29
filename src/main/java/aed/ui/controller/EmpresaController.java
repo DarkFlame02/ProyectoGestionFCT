@@ -1,11 +1,8 @@
 package aed.ui.controller;
 
-import aed.db.comentarios.Comentarios;
-import aed.db.comentarios.crud.Actualizar_Comentarios;
 import aed.db.empresas.Empresas;
 import aed.db.empresas.crud.Actualizar_Empresas;
 import aed.db.empresas.crud.Nombre_Empresa;
-import aed.ui.dialog.BuscarAlumnoDialog;
 import aed.ui.dialog.BuscarEmpresaDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
@@ -20,7 +17,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
@@ -41,6 +37,9 @@ public class EmpresaController implements Initializable {
     private final ObjectProperty<Empresas> selectedEmpresa = new SimpleObjectProperty<>();
 
     // view
+
+    @FXML
+    private TextField idEmpresaText;
 
     @FXML
     private TextField apellidosTutorEtext;
@@ -104,6 +103,7 @@ public class EmpresaController implements Initializable {
 
     private void onEmpresaChanged(ObservableValue<? extends Empresas> o, Empresas oldValue, Empresas newValue) {
         if (oldValue != null) {
+            oldValue.setIdEmpresa(Integer.parseInt(idEmpresaText.getText()));
             oldValue.setNifEmpresa(nifText.getText());
             oldValue.setNombreEmpresa(nombreEmpresaText.getText());
             oldValue.setDireccionEmpresa(direccionEmpresaText.getText());
@@ -115,6 +115,7 @@ public class EmpresaController implements Initializable {
         }
 
         if (newValue != null) {
+            idEmpresaText.setText(String.valueOf(newValue.getIdEmpresa()));
             nifText.setText(newValue.getNifEmpresa());
             nombreEmpresaText.setText(newValue.getNombreEmpresa());
             direccionEmpresaText.setText(newValue.getDireccionEmpresa());

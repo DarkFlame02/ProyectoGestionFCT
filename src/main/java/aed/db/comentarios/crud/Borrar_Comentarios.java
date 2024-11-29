@@ -9,15 +9,14 @@ import java.sql.SQLException;
 
 public class Borrar_Comentarios {
 
-    public void borrarComentario() {
-        String query = "DELETE FROM comentarioscaptacion WHERE IdEmpresa = ? AND IdTutor = ?";
+    public void borrarComentario(int idEmpresa) {
+        String query = "DELETE FROM comentarioscaptacion WHERE IdEmpresa = ?";
 
         try (Connection conn = ConexionHCP.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(query)){
 
-            stmt.setInt(1, 1);
-            stmt.setInt(2,1);
+            stmt.setInt(1, idEmpresa);
+
             int filasEliminadas = stmt.executeUpdate();
             System.out.println(filasEliminadas+" fila(s) eliminada(s).");
 
