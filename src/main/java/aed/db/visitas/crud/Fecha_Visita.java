@@ -12,7 +12,7 @@ public class Fecha_Visita {
     public static ObservableList<Visitas> listarVisitas() {
 
         ObservableList<Visitas> listaVisitas = FXCollections.observableArrayList();
-        String query = "SELECT fechaVisita, a.nombreAlumno, comentario FROM visitas v JOIN alumnos a ON v.idAlumno=a.idAlumno;";
+        String query = "SELECT idVisita, fechaVisita, a.idAlumno, a.nombreAlumno, comentario FROM visitas v JOIN alumnos a ON v.idAlumno=a.idAlumno;";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
@@ -20,9 +20,11 @@ public class Fecha_Visita {
 
             while (rs.next()) {
                 Date fechaVisita = rs.getDate("fechaVisita");
+                int idAlumno = rs.getInt("idAlumno");
                 String nombreAlumno = rs.getString("nombreAlumno");
                 String comentario = rs.getString("comentario");
-                Visitas visitas = new Visitas(fechaVisita, nombreAlumno, comentario);
+                int idVisita = rs.getInt("idVisita");
+                Visitas visitas = new Visitas(fechaVisita, idAlumno, nombreAlumno, comentario, idVisita);
                 listaVisitas.add(visitas);
             }
         } catch (SQLException e) {

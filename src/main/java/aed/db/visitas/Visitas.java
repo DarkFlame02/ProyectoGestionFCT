@@ -7,22 +7,24 @@ import java.sql.Date;
 public class Visitas {
     private IntegerProperty idVisita = new SimpleIntegerProperty();
     private ObjectProperty<Date> fechaVisita = new SimpleObjectProperty<>();
-    private IntegerProperty idAlumnp = new SimpleIntegerProperty();
+    private IntegerProperty idAlumno = new SimpleIntegerProperty();
     private StringProperty comentario = new SimpleStringProperty();
     private StringProperty nombreAlumno = new SimpleStringProperty();
 
     public Visitas() {}
 
-    public Visitas(Date fechaVisita, String nombreAlumno, String comentario) {
+    public Visitas(Date fechaVisita, int idAlumno,String nombreAlumno, String comentario, int idVisita) {
         this.fechaVisita.set(fechaVisita);
+        this.idAlumno.set(idAlumno);
         this.nombreAlumno.set(nombreAlumno);
         this.comentario.set(comentario);
+        this.idVisita.set(idVisita);
     }
 
-    public Visitas(IntegerProperty idVisita, ObjectProperty<Date> fechaVisita, IntegerProperty idAlumnp, StringProperty comentario, StringProperty nombreAlumno) {
+    public Visitas(IntegerProperty idVisita, ObjectProperty<Date> fechaVisita, IntegerProperty idAlumno, StringProperty comentario, StringProperty nombreAlumno) {
         this.idVisita = idVisita;
         this.fechaVisita = fechaVisita;
-        this.idAlumnp = idAlumnp;
+        this.idAlumno = idAlumno;
         this.comentario = comentario;
         this.nombreAlumno = nombreAlumno;
     }
@@ -51,16 +53,16 @@ public class Visitas {
         this.fechaVisita.set(fechaVisita);
     }
 
-    public int getIdAlumnp() {
-        return idAlumnp.get();
+    public int getIdAlumno() {
+        return idAlumno.get();
     }
 
-    public IntegerProperty idAlumnpProperty() {
-        return idAlumnp;
+    public IntegerProperty idAlumnoProperty() {
+        return idAlumno;
     }
 
-    public void setIdAlumnp(int idAlumnp) {
-        this.idAlumnp.set(idAlumnp);
+    public void setIdAlumno(int idAlumno) {
+        this.idAlumno.set(idAlumno);
     }
 
     public String getComentario() {

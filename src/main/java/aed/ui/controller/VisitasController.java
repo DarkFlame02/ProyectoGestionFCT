@@ -1,10 +1,9 @@
 package aed.ui.controller;
 
-import aed.db.tutor.Tutor;
-import aed.db.tutor.crud.Nombre_Tutor;
+import aed.db.practicas.crud.Actualizar_Practicas;
 import aed.db.visitas.Visitas;
+import aed.db.visitas.crud.Actualizar_Visitas;
 import aed.db.visitas.crud.Fecha_Visita;
-import aed.ui.dialog.BuscarTutorDialog;
 import aed.ui.dialog.BuscarVisitaDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
@@ -36,7 +35,7 @@ public class VisitasController implements Initializable {
                     visita -> new Observable[] { visita.fechaVisitaProperty() } // indicamos que properties de cada bean son observables dentro de la lista
             )
     );
-    private final ObjectProperty<Visitas> selectedComentario = new SimpleObjectProperty<>();
+    private final ObjectProperty<Visitas> selectedVisita = new SimpleObjectProperty<>();
 
     // view
 
@@ -81,7 +80,7 @@ public class VisitasController implements Initializable {
             }
         });
 
-        selectedComentario.bind(visitaList.getSelectionModel().selectedItemProperty());
+        selectedVisita.bind(visitaList.getSelectionModel().selectedItemProperty());
         visita.addListener(this::onVisitaChanged);
     }
 
@@ -127,6 +126,27 @@ public class VisitasController implements Initializable {
 
     @FXML
     void onUpdateAction(ActionEvent event) {
+        if (selectedVisita.get() != null) {
+            Visitas visitaActualizada = selectedVisita.get();
 
+            visitaActualizada.setFechaVisita(Date.valueOf(visitaDate.getValue()));
+            visitaActualizada.setNombreAlumno(nombreText.getText());
+            visitaActualizada.setComentario(comentarioText.getText());
+
+            Actualizar_Visitas actualizador = new Actualizar_Visitas();
+            try {
+                actualizador.actualizarVisitas(
+                        visitaActualizada.getFechaVisita(),
+                        visitaActualizada.getIdAlumno(),
+                        visitaActualizada.getComentario(),
+                        visitaActualizada.getIdVisita()
+                );
+                System.out.println("Visitas actualizado correctamente.");
+            } catch (Exception e) {
+                System.err.println("Error al actualizar el visita: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se ha seleccionado ningún visita para actualizar.");
+        }
     }
 }
