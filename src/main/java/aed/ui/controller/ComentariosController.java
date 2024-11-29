@@ -128,6 +128,11 @@ public class ComentariosController implements Initializable {
     }
 
     @FXML
+    void onNewAction(ActionEvent event) {
+
+    }
+
+    @FXML
     void onAddAction(ActionEvent event) {
 
     }

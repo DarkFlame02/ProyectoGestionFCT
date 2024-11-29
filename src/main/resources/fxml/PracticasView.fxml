@@ -48,6 +48,7 @@
    <bottom>
       <HBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
+            <Button mnemonicParsing="false" onAction="#onNewAction" text="Nuevo" />
             <Button mnemonicParsing="false" onAction="#onAddAction" text="Añadir" />
             <Button mnemonicParsing="false" onAction="#onDeleteAction" text="Eliminar" />
             <Button mnemonicParsing="false" onAction="#onSearchAction" text="Buscar" />
