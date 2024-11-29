@@ -29,6 +29,7 @@ import java.util.ResourceBundle;
 public class AlumnoController implements Initializable {
 
     //model
+    private Alumnos newAlumno = new Alumnos();
 
     private final ObjectProperty<Alumnos> alumno = new SimpleObjectProperty<>();
     private final ListProperty<Alumnos> alumnos = new SimpleListProperty<>(
@@ -137,9 +138,9 @@ public class AlumnoController implements Initializable {
 //        numssText.clear();
 //        idTutorText.clear();
 
-        if (nombreText.getText().isEmpty() || apellidosText.getText().isEmpty() ||
+        if (!(nombreText.getText().isEmpty() || apellidosText.getText().isEmpty() ||
                 cialText.getText().isEmpty() || cursoText.getText().isEmpty() ||
-                numssText.getText().isEmpty()) {
+                numssText.getText().isEmpty())) {
 
             System.out.println("Todos los campos deben estar completos.");
         }
@@ -165,6 +166,7 @@ public class AlumnoController implements Initializable {
             System.out.println("Alumno agregado correctamente.");
 
             alumnos.add(nuevoAlumno);
+            alumnos.remove(newAlumno); //Se puede mejorar
 
             nombreText.clear();
             apellidosText.clear();
@@ -174,7 +176,6 @@ public class AlumnoController implements Initializable {
         } catch (Exception e) {
             System.err.println("Error al agregar el alumno: " + e.getMessage());
         }
-
 
     }
 
@@ -254,6 +255,19 @@ public class AlumnoController implements Initializable {
         dialog.showAndWait().ifPresent(buscar -> {
             System.out.println(buscar.getIdAlumno());
         });
+    }
+
+    @FXML
+    void onNewAction(ActionEvent event) {
+
+        newAlumno.setNombreAlumno("Nuevo");
+        newAlumno.setApellidosAlumno("Alumno");
+        newAlumno.setCialAlumno("");
+        newAlumno.setCursoAlumno("");
+        newAlumno.setNumSSAlumno("");
+        newAlumno.setIdTutor(101);
+
+        alumnos.add(newAlumno);
     }
 
 }
