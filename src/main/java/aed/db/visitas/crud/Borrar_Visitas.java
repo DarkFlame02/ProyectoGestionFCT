@@ -10,15 +10,13 @@ import java.util.Date;
 
 public class Borrar_Visitas {
 
-    public void borrarVisitas() {
+    public void borrarVisitas(int idVisita) {
         String query = "DELETE FROM visitas WHERE idVisita = ?";
 
         try (Connection conn = ConexionHCP.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-
-            stmt.setInt(1, 1);
+            stmt.setInt(1, idVisita);
 
             int filasEliminadas = stmt.executeUpdate();
             System.out.println(filasEliminadas+" fila(s) eliminada(s).");

@@ -1,8 +1,11 @@
 package aed.ui.controller;
 
 import aed.db.practicas.crud.Actualizar_Practicas;
+import aed.db.tutor.Tutor;
+import aed.db.tutor.crud.Borrar_Tutor;
 import aed.db.visitas.Visitas;
 import aed.db.visitas.crud.Actualizar_Visitas;
+import aed.db.visitas.crud.Borrar_Visitas;
 import aed.db.visitas.crud.Fecha_Visita;
 import aed.ui.dialog.BuscarVisitaDialog;
 import javafx.beans.Observable;
@@ -38,6 +41,9 @@ public class VisitasController implements Initializable {
     private final ObjectProperty<Visitas> selectedVisita = new SimpleObjectProperty<>();
 
     // view
+
+    @FXML
+    private TextField idVisitaText;
 
     @FXML
     private TextField nombreText;
@@ -82,21 +88,44 @@ public class VisitasController implements Initializable {
 
         selectedVisita.bind(visitaList.getSelectionModel().selectedItemProperty());
         visita.addListener(this::onVisitaChanged);
+
+        idVisitaText.setDisable(true);
     }
 
     private void onVisitaChanged(ObservableValue<? extends Visitas> o, Visitas oldValue, Visitas newValue) {
         if (oldValue != null) {
-            oldValue.setFechaVisita(Date.valueOf(visitaDate.getValue()));
-            oldValue.setNombreAlumno(nombreText.getText());
-            oldValue.setComentario(comentarioText.getText());
+            try {
+                if (!idVisitaText.getText().isEmpty()) {
+                    oldValue.setIdVisita(Integer.parseInt(idVisitaText.getText()));
+                }
+                if (visitaDate.getValue() != null) { // Verifica que visitaDate no sea nulo
+                    oldValue.setFechaVisita(Date.valueOf(visitaDate.getValue()));
+                }
+                oldValue.setNombreAlumno(nombreText.getText());
+                oldValue.setComentario(comentarioText.getText());
+            } catch (Exception e) {
+                System.err.println("Error actualizando oldValue: " + e.getMessage());
+            }
         }
 
         if (newValue != null) {
-            visitaDate.setValue(newValue.getFechaVisita().toLocalDate());
+            idVisitaText.setText(String.valueOf(newValue.getIdVisita()));
+            if (newValue.getFechaVisita() != null) {
+                visitaDate.setValue(newValue.getFechaVisita().toLocalDate());
+            } else {
+                visitaDate.setValue(null);
+            }
             nombreText.setText(newValue.getNombreAlumno());
             comentarioText.setText(newValue.getComentario());
+        } else {
+            idVisitaText.clear();
+            visitaDate.setValue(null);
+            nombreText.clear();
+            comentarioText.clear();
         }
     }
+
+
     public BorderPane getRoot() {
         return root;
     }
@@ -118,7 +147,29 @@ public class VisitasController implements Initializable {
 
     @FXML
     void onDeleteAction(ActionEvent event) {
+        if (selectedVisita.get() != null) {
+            Visitas visitaBorrada = selectedVisita.get();
 
+            Borrar_Visitas borrador = new Borrar_Visitas();
+            try {
+                borrador.borrarVisitas(
+                        visitaBorrada.getIdVisita()
+                );
+                System.out.println("Empresa borrado correctamente.");
+
+                visitas.remove(visitaBorrada);
+
+                idVisitaText.clear();
+                nombreText.clear();
+                visitaDate.setValue(null);
+                comentarioText.clear();
+
+            } catch (Exception e) {
+                System.err.println("Error al borrar el empresa: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se ha seleccionado ningún empresa para borrar.");
+        }
     }
 
     @FXML
