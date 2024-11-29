@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-11-2024 a las 20:37:21
+-- Tiempo de generación: 29-11-2024 a las 20:18:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,7 +44,8 @@ CREATE TABLE `alumnos` (
 INSERT INTO `alumnos` (`idAlumno`, `nombreAlumno`, `apellidosAlumno`, `cialAlumno`, `cursoAlumno`, `numSSAlumno`, `idTutor`) VALUES
 (1, 'Juan', 'Pérez García', '12345678A', '1º ESO', '12345678901', 101),
 (2, 'María', 'López Sánchez', '87654321B', '2º ESO', '10987654321', 102),
-(3, 'Carlos', 'Gómez Ruiz', '11223344C', '3º ESO', '12345098765', 103);
+(3, 'Carlos', 'Gómez Ruiz', '11223344C', '3º ESO', '12345098765', 103),
+(4, 'Pepe', 'gomez', '123124', '2ºDAM', '5616515', 101);
 
 -- --------------------------------------------------------
 
@@ -174,9 +175,9 @@ CREATE TABLE `visitas` (
 --
 
 INSERT INTO `visitas` (`idVisita`, `fechaVisita`, `idAlumno`, `comentario`) VALUES
-('1', '2024-11-01', 1, 'Visita realizada para revisar el progreso del alumno, todo en orden.'),
-('2', '2024-11-10', 2, 'Visita para resolver dudas sobre el proyecto final. El alumno mostró buen desempeño.'),
-('3', '2024-11-15', 3, 'Visita para discutir áreas de mejora en la tarea asignada. El alumno necesita más apoyo en el tema.');
+(1, '2024-11-01', 1, 'Visita realizada para revisar el progreso del alumno, todo en orden.'),
+(2, '2024-11-10', 2, 'Visita para resolver dudas sobre el proyecto final. El alumno mostró buen desempeño.'),
+(3, '2024-11-15', 3, 'Visita para discutir áreas de mejora en la tarea asignada. El alumno necesita más apoyo en el tema.');
 
 --
 -- Índices para tablas volcadas
@@ -240,7 +241,7 @@ ALTER TABLE `visitas`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `empresa`
@@ -263,20 +264,12 @@ ALTER TABLE `tutorempresa`
 --
 -- AUTO_INCREMENT de la tabla `visitas`
 --
-
 ALTER TABLE `visitas`
   MODIFY `idVisita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `alumnos`
---
-ALTER TABLE `alumnos`
-  ADD CONSTRAINT `alumnos_ibfk_1` FOREIGN KEY (`idTutor`) REFERENCES `tutor` (`idTutor`);
 
 --
 -- Filtros para la tabla `asignacion`

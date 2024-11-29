@@ -89,19 +89,20 @@ public class PracticasController implements Initializable {
             }
         });
 
-        idAlumnoText.setDisable(true);
-        nombreAlumnoText.setDisable(true);
-        nombreTutorEText.setDisable(true);
-
         selectedPractica.bind(practicaList.getSelectionModel().selectedItemProperty());
         practica.addListener(this::onPracticaChanged);
     }
 
     private void onPracticaChanged(ObservableValue<? extends Practicas> o, Practicas oldValue, Practicas newValue) {
         if (oldValue != null) {
-            oldValue.setIdAlumno(Integer.parseInt(idAlumnoText.getText()));
+            if (!idAlumnoText.getText().isEmpty()) {
+                oldValue.setIdAlumno(Integer.parseInt(idAlumnoText.getText()));
+            }
             oldValue.setNombreAlumno(nombreAlumnoText.getText());
-            oldValue.setIdTutorE(Integer.parseInt(idTutorEText.getText()));
+
+            if (!idTutorEText.getText().isEmpty()) {
+                oldValue.setIdTutorE(Integer.parseInt(idTutorEText.getText()));
+            }
             oldValue.setNombreTutorE(nombreTutorEText.getText());
         }
 
@@ -112,6 +113,7 @@ public class PracticasController implements Initializable {
             nombreTutorEText.setText(newValue.getNombreTutorE());
         }
     }
+
 
     public BorderPane getRoot() {
         return root;
@@ -146,6 +148,10 @@ public class PracticasController implements Initializable {
 
                 practicas.remove(practicaBorrada);
 
+                idAlumnoText.clear();
+                nombreAlumnoText.clear();
+                idTutorEText.clear();
+                nombreTutorEText.clear();
 
 
             } catch (Exception e) {

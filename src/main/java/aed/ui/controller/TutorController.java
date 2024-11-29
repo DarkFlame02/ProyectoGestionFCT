@@ -6,6 +6,7 @@ import aed.db.practicas.Practicas;
 import aed.db.practicas.crud.Practicas_Empresa;
 import aed.db.tutor.Tutor;
 import aed.db.tutor.crud.Actualizar_Tutor;
+import aed.db.tutor.crud.Borrar_Tutor;
 import aed.db.tutor.crud.Nombre_Tutor;
 import aed.ui.dialog.BuscarAlumnoDialog;
 import aed.ui.dialog.BuscarTutorDialog;
@@ -42,6 +43,9 @@ public class TutorController implements Initializable {
     private final ObjectProperty<Tutor> selectedTutor = new SimpleObjectProperty<>();
 
     // view
+
+    @FXML
+    private TextField idTutorText;
 
     @FXML
     private TextField apellidosText;
@@ -86,16 +90,23 @@ public class TutorController implements Initializable {
 
         selectedTutor.bind(tutorList.getSelectionModel().selectedItemProperty());
         tutor.addListener(this::onTutorChanged);
+
+        idTutorText.setDisable(true);
+
     }
 
     private void onTutorChanged(ObservableValue<? extends Tutor> o, Tutor oldValue, Tutor newValue) {
         if (oldValue != null) {
+            if (!idTutorText.getText().isEmpty()) {
+                oldValue.setIdTutor(Integer.parseInt(idTutorText.getText()));
+            }
             oldValue.setNombreTutor(nombreText.getText());
             oldValue.setApellidosTutor(apellidosText.getText());
             oldValue.setEmailTutor(emailText.getText());
         }
 
         if (newValue != null) {
+            idTutorText.setText(String.valueOf(newValue.getIdTutor()));
             nombreText.setText(newValue.getNombreTutor());
             apellidosText.setText(newValue.getApellidosTutor());
             emailText.setText(newValue.getEmailTutor());
@@ -123,7 +134,29 @@ public class TutorController implements Initializable {
 
     @FXML
     void onDeleteAction(ActionEvent event) {
+        if (selectedTutor.get() != null) {
+            Tutor tutorBorrado = selectedTutor.get();
 
+            Borrar_Tutor borrador = new Borrar_Tutor();
+            try {
+                borrador.borrarTutor(
+                        tutorBorrado.getIdTutor()
+                );
+                System.out.println("Empresa borrado correctamente.");
+
+                tutores.remove(tutorBorrado);
+
+                idTutorText.clear();
+                nombreText.clear();
+                apellidosText.clear();
+                emailText.clear();
+
+            } catch (Exception e) {
+                System.err.println("Error al borrar el empresa: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se ha seleccionado ningún empresa para borrar.");
+        }
     }
 
     @FXML
