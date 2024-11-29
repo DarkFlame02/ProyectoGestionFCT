@@ -3,6 +3,7 @@ package aed.ui.controller;
 import aed.db.alumnos.Alumnos;
 import aed.db.alumnos.crud.Actualizar_Alumnos;
 import aed.db.alumnos.crud.Borrar_Alumnos;
+import aed.db.alumnos.crud.Crear_Alumnos;
 import aed.db.alumnos.crud.Nombre_Alumno;
 import aed.ui.dialog.BuscarAlumnoDialog;
 import javafx.beans.Observable;
@@ -52,6 +53,12 @@ public class AlumnoController implements Initializable {
     private TextField cursoText;
 
     @FXML
+    private TextField idText;
+
+    @FXML
+    private TextField idTutorText;
+
+    @FXML
     private TextField nombreText;
 
     @FXML
@@ -89,25 +96,30 @@ public class AlumnoController implements Initializable {
         selectedAlumno.bind(alumnoList.getSelectionModel().selectedItemProperty());
         alumno.addListener(this::onAlumnoChanged);
 
+        idText.setDisable(true);
+
     }
 
     private void onAlumnoChanged(ObservableValue<? extends Alumnos> o, Alumnos oldValue, Alumnos newValue) {
         if (oldValue != null) {
-            oldValue.setNombreAlumno(nombreText.getText());
-            oldValue.setApellidosAlumno(apellidosText.getText());
-            oldValue.setCialAlumno(cialText.getText());
-            oldValue.setCursoAlumno(cursoText.getText());
-            oldValue.setNumSSAlumno(numssText.getText());
+            oldValue.setIdAlumno(idText.getText().isEmpty() ? 0 : Integer.parseInt(idText.getText()));
+            oldValue.setNombreAlumno(nombreText.getText() != null && !nombreText.getText().isEmpty() ? nombreText.getText() : "");
+            oldValue.setApellidosAlumno(apellidosText.getText() != null && !apellidosText.getText().isEmpty() ? apellidosText.getText() : "");
+            oldValue.setCialAlumno(cialText.getText() != null && !cialText.getText().isEmpty() ? cialText.getText() : "");
+            oldValue.setCursoAlumno(cursoText.getText() != null && !cursoText.getText().isEmpty() ? cursoText.getText() : "");
+            oldValue.setNumSSAlumno(numssText.getText() != null && !numssText.getText().isEmpty() ? numssText.getText() : "");
+            oldValue.setIdTutor(idTutorText.getText().isEmpty() ? 0 : Integer.parseInt(idTutorText.getText()));
         }
 
         if (newValue != null) {
+            idText.setText(String.valueOf(newValue.getIdAlumno()));
             nombreText.setText(newValue.getNombreAlumno());
             apellidosText.setText(newValue.getApellidosAlumno());
             cialText.setText(newValue.getCialAlumno());
             cursoText.setText(newValue.getCursoAlumno());
             numssText.setText(newValue.getNumSSAlumno());
+            idTutorText.setText(String.valueOf(newValue.getIdTutor()));
         }
-
     }
 
     public BorderPane getRoot() {
@@ -116,6 +128,53 @@ public class AlumnoController implements Initializable {
 
     @FXML
     void onAddAction(ActionEvent event) {
+
+//        idText.clear();
+//        nombreText.clear();
+//        apellidosText.clear();
+//        cialText.clear();
+//        cursoText.clear();
+//        numssText.clear();
+//        idTutorText.clear();
+
+        if (nombreText.getText().isEmpty() || apellidosText.getText().isEmpty() ||
+                cialText.getText().isEmpty() || cursoText.getText().isEmpty() ||
+                numssText.getText().isEmpty()) {
+
+            System.out.println("Todos los campos deben estar completos.");
+        }
+
+        Alumnos nuevoAlumno = new Alumnos();
+        nuevoAlumno.setNombreAlumno(nombreText.getText());
+        nuevoAlumno.setApellidosAlumno(apellidosText.getText());
+        nuevoAlumno.setCialAlumno(cialText.getText());
+        nuevoAlumno.setCursoAlumno(cursoText.getText());
+        nuevoAlumno.setNumSSAlumno(numssText.getText());
+        nuevoAlumno.setIdTutor(Integer.parseInt(idTutorText.getText()));
+
+        Crear_Alumnos creador = new Crear_Alumnos();
+        try {
+            creador.registrarAlumnos(
+                    nuevoAlumno.getNombreAlumno(),
+                    nuevoAlumno.getApellidosAlumno(),
+                    nuevoAlumno.getCialAlumno(),
+                    nuevoAlumno.getCursoAlumno(),
+                    nuevoAlumno.getNumSSAlumno(),
+                    nuevoAlumno.getIdTutor()
+            );
+            System.out.println("Alumno agregado correctamente.");
+
+            alumnos.add(nuevoAlumno);
+
+            nombreText.clear();
+            apellidosText.clear();
+            cialText.clear();
+            cursoText.clear();
+            numssText.clear();
+        } catch (Exception e) {
+            System.err.println("Error al agregar el alumno: " + e.getMessage());
+        }
+
 
     }
 
@@ -140,11 +199,14 @@ public class AlumnoController implements Initializable {
 
                 alumnos.remove(alumnoBorrado);
 
+                idText.clear();
                 nombreText.clear();
                 apellidosText.clear();
                 cialText.clear();
                 cursoText.clear();
                 numssText.clear();
+                idTutorText.clear();
+
             } catch (Exception e) {
                 System.err.println("Error al borrar el alumno: " + e.getMessage());
             }
@@ -158,11 +220,13 @@ public class AlumnoController implements Initializable {
         if (selectedAlumno.get() != null) {
             Alumnos alumnoActualizado = selectedAlumno.get();
 
+            alumnoActualizado.setIdAlumno(Integer.parseInt(idText.getText()));
             alumnoActualizado.setNombreAlumno(nombreText.getText());
             alumnoActualizado.setApellidosAlumno(apellidosText.getText());
             alumnoActualizado.setCialAlumno(cialText.getText());
             alumnoActualizado.setCursoAlumno(cursoText.getText());
             alumnoActualizado.setNumSSAlumno(numssText.getText());
+            alumnoActualizado.setIdTutor(Integer.parseInt(idTutorText.getText()));
 
             Actualizar_Alumnos actualizador = new Actualizar_Alumnos();
             try {
