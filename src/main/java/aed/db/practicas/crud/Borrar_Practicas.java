@@ -9,14 +9,13 @@ import java.sql.SQLException;
 
 public class Borrar_Practicas {
 
-    public void borrarPractica() {
-        String query = "DELETE FROM asignacion WHERE IdAlumno = ? AND IdTutorE = ?";
+    public void borrarPractica(int idAlumno) {
+        String query = "DELETE FROM asignacion WHERE IdAlumno = ?";
 
         try (Connection conn = ConexionHCP.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            stmt.setInt(1, 1);
+            stmt.setInt(1, idAlumno);
             stmt.setInt(2, 1);
 
             int filasEliminadas = stmt.executeUpdate();

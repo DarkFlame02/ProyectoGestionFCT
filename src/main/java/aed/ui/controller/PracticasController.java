@@ -3,8 +3,11 @@ package aed.ui.controller;
 
 import aed.db.comentarios.Comentarios;
 import aed.db.comentarios.crud.Actualizar_Comentarios;
+import aed.db.empresas.Empresas;
+import aed.db.empresas.crud.Borrar_Empresas;
 import aed.db.practicas.Practicas;
 import aed.db.practicas.crud.Actualizar_Practicas;
+import aed.db.practicas.crud.Borrar_Practicas;
 import aed.db.practicas.crud.Practicas_Empresa;
 import aed.ui.dialog.BuscarPracticasDialog;
 import aed.ui.dialog.BuscarVisitaDialog;
@@ -131,7 +134,26 @@ public class PracticasController implements Initializable {
 
     @FXML
     void onDeleteAction(ActionEvent event) {
+        if (selectedPractica.get() != null) {
+            Practicas practicaBorrada = selectedPractica.get();
 
+            Borrar_Practicas borrador = new Borrar_Practicas();
+            try {
+                borrador.borrarPractica(
+                        practicaBorrada.getIdAlumno()
+                );
+                System.out.println("Practica borrada correctamente.");
+
+                practicas.remove(practicaBorrada);
+
+
+
+            } catch (Exception e) {
+                System.err.println("Error al borrar la practica: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No se ha seleccionado ninguna practica para borrar.");
+        }
     }
 
     @FXML
