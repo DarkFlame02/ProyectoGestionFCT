@@ -165,10 +165,10 @@ public class VisitasController implements Initializable {
                 comentarioText.clear();
 
             } catch (Exception e) {
-                System.err.println("Error al borrar el empresa: " + e.getMessage());
+                System.err.println("Error al borrar la visita: " + e.getMessage());
             }
         } else {
-            System.out.println("No se ha seleccionado ningún empresa para borrar.");
+            System.out.println("No se ha seleccionado ninguna visita para borrar.");
         }
     }
 
@@ -211,12 +211,12 @@ public class VisitasController implements Initializable {
                         visitaActualizada.getComentario(),
                         visitaActualizada.getIdVisita()
                 );
-                System.out.println("Visitas actualizado correctamente.");
+                System.out.println("Visitas actualizadas correctamente.");
             } catch (Exception e) {
-                System.err.println("Error al actualizar el visita: " + e.getMessage());
+                System.err.println("Error al actualizar la visita: " + e.getMessage());
             }
         } else {
-            System.out.println("No se ha seleccionado ningún visita para actualizar.");
+            System.out.println("No se ha seleccionado ninguna visita para actualizar.");
         }
     }
 }

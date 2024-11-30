@@ -192,12 +192,12 @@ public class PracticasController implements Initializable {
                         practicaActualizada.getIdTutorE(),
                         practicaActualizada.getIdAlumno()
                         );
-                System.out.println("Practicas actualizado correctamente.");
+                System.out.println("Practicas actualizadas correctamente.");
             } catch (Exception e) {
-                System.err.println("Error al actualizar el practicas: " + e.getMessage());
+                System.err.println("Error al actualizar las practicas: " + e.getMessage());
             }
         } else {
-            System.out.println("No se ha seleccionado ningún practica para actualizar.");
+            System.out.println("No se ha seleccionado ninguna practica para actualizar.");
         }
     }
 }

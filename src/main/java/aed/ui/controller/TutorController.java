@@ -145,7 +145,7 @@ public class TutorController implements Initializable {
                 borrador.borrarTutor(
                         tutorBorrado.getIdTutor()
                 );
-                System.out.println("Empresa borrado correctamente.");
+                System.out.println("Tutor borrado correctamente.");
 
                 tutores.remove(tutorBorrado);
 
@@ -155,10 +155,10 @@ public class TutorController implements Initializable {
                 emailText.clear();
 
             } catch (Exception e) {
-                System.err.println("Error al borrar el empresa: " + e.getMessage());
+                System.err.println("Error al borrar el tutor: " + e.getMessage());
             }
         } else {
-            System.out.println("No se ha seleccionado ningún empresa para borrar.");
+            System.out.println("No se ha seleccionado ningún tutor para borrar.");
         }
     }
 

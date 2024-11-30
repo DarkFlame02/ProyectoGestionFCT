@@ -184,10 +184,10 @@ public class EmpresaController implements Initializable {
                 emailTutorEtext.clear();
 
             } catch (Exception e) {
-                System.err.println("Error al borrar el empresa: " + e.getMessage());
+                System.err.println("Error al borrar la empresa: " + e.getMessage());
             }
         } else {
-            System.out.println("No se ha seleccionado ningún empresa para borrar.");
+            System.out.println("No se ha seleccionado ninguna empresa para borrar.");
         }
     }
 
@@ -243,10 +243,10 @@ public class EmpresaController implements Initializable {
                 );
                 System.out.println("Empresa actualizado correctamente.");
             } catch (Exception e) {
-                System.err.println("Error al actualizar el empresa: " + e.getMessage());
+                System.err.println("Error al actualizar la empresa: " + e.getMessage());
             }
         } else {
-            System.out.println("No se ha seleccionado ningún empresa para actualizar.");
+            System.out.println("No se ha seleccionado ninguna empresa para actualizar.");
         }
 
     }
