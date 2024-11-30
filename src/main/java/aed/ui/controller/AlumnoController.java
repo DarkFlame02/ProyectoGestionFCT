@@ -1,10 +1,7 @@
 package aed.ui.controller;
 
 import aed.db.alumnos.Alumnos;
-import aed.db.alumnos.crud.Actualizar_Alumnos;
-import aed.db.alumnos.crud.Borrar_Alumnos;
-import aed.db.alumnos.crud.Crear_Alumnos;
-import aed.db.alumnos.crud.Nombre_Alumno;
+import aed.db.alumnos.crud.*;
 import aed.ui.dialog.BuscarAlumnoDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
@@ -246,9 +243,24 @@ public class AlumnoController implements Initializable {
     void onSearchAction(ActionEvent event) {
         BuscarAlumnoDialog dialog = new BuscarAlumnoDialog();
         dialog.showAndWait().ifPresent(buscar -> {
-            System.out.println(buscar.getIdAlumno());
+
+            int idAlumno = buscar.getIdAlumno();
+            ObservableList<Alumnos> resultado = Buscar_Alumnos.buscarAlumnos(idAlumno);
+
+            if (!resultado.isEmpty()) {
+                Alumnos alumnoEncontrado = resultado.get(0);
+                System.out.println("Alumno encontrado: " + alumnoEncontrado.getNombreAlumno());
+
+                alumnos.clear();
+                alumnos.addAll(resultado);
+                alumnoList.getSelectionModel().select(alumnoEncontrado);
+
+            } else {
+                System.out.println("No se encontró un alumno con ID: " + idAlumno);
+            }
         });
     }
+
 
     @FXML
     void onNewAction(ActionEvent event) {
