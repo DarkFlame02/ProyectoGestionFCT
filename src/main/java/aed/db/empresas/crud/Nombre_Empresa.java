@@ -15,8 +15,8 @@ public class Nombre_Empresa {
     public static ObservableList<Empresas> listarEmpresas() {
 
         ObservableList<Empresas> listaEmpresas = FXCollections.observableArrayList();
-        String query = "SELECT e.idEmpresa, e.nifEmpresa , e.nombreEmpresa, e.direccionEmpresa, e.tipoEmpresa, t.nombreTutorE, " +
-                "t.apellidosTutorE, t.telefonoContacto, t.emailTutorE FROM empresa e JOIN tutorempresa t " +
+        String query = "SELECT e.idEmpresa, e.nifEmpresa , e.nombreEmpresa, e.direccionEmpresa, e.tipoEmpresa, " +
+                "t.nombreTutorE, t.apellidosTutorE, t.telefonoContacto, t.emailTutorE FROM empresa e JOIN tutorempresa t " +
                 "on e.idEmpresa=t.idEmpresa";
 
         try (Connection conn = ConexionHCP.getConnection();

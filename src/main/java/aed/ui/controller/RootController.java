@@ -29,10 +29,6 @@ public class RootController implements Initializable {
     private VisitasController visitasController = new VisitasController();
     private ComentariosController comentariosController = new ComentariosController();
 
-    // model
-
-
-
     // view
 
     @FXML
