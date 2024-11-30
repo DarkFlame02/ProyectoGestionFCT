@@ -46,7 +46,7 @@ public class BuscarVisitaDialog  extends Dialog<Visitas> implements Initializabl
     public void initialize(URL location, ResourceBundle resources) {
         // init dialog
 
-        setTitle("Buscar Practica");
+        setTitle("Buscar visita");
         getDialogPane().setContent(root);
         getDialogPane().getButtonTypes().setAll(
                 new ButtonType("Buscar", ButtonBar.ButtonData.OK_DONE),

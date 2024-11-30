@@ -17,7 +17,7 @@ public class Buscar_Comentarios {
     public static ObservableList<Comentarios> buscarComentarios(int idEmpresa) {
 
         ObservableList<Comentarios> listaComentarios = FXCollections.observableArrayList();
-        String query = "SELECT c.idEmpresa, e.nombreEmpresa, c.idTutor, c.comentario FROM comentarioscaptacion c JOIN empresa e ON e.idEmpresa=c.idEmpresa WHERE nombreEmpresa = ?;";
+        String query = "SELECT c.idEmpresa, e.nombreEmpresa, c.idTutor, c.comentario FROM comentarioscaptacion c JOIN empresa e ON e.idEmpresa=c.idEmpresa WHERE c.idEmpresa = ?;";
 
         try (Connection conn = ConexionHCP.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {

@@ -45,7 +45,7 @@ public class BuscarComentariosDialog extends Dialog<Comentarios> implements Init
     public void initialize(URL location, ResourceBundle resources) {
         // init dialog
 
-        setTitle("Buscar Practica");
+        setTitle("Buscar comentario");
         getDialogPane().setContent(root);
         getDialogPane().getButtonTypes().setAll(
                 new ButtonType("Buscar", ButtonBar.ButtonData.OK_DONE),
@@ -62,7 +62,7 @@ public class BuscarComentariosDialog extends Dialog<Comentarios> implements Init
     private Comentarios onReSult(ButtonType buttonType) {
         if (buttonType.getButtonData() == ButtonBar.ButtonData.OK_DONE) {
             Comentarios comentarios = new Comentarios();
-            comentarios.setIdTutor(Integer.parseInt(idComentarios.get()));
+            comentarios.setIdEmpresa(Integer.parseInt(idComentarios.get()));
             return comentarios;
         }
         return null;

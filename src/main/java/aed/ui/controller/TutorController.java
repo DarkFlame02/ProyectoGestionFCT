@@ -3,12 +3,15 @@ package aed.ui.controller;
 import aed.db.comentarios.Comentarios;
 import aed.db.comentarios.crud.Actualizar_Comentarios;
 import aed.db.practicas.Practicas;
+import aed.db.practicas.crud.Buscar_Practicas;
 import aed.db.practicas.crud.Practicas_Empresa;
 import aed.db.tutor.Tutor;
 import aed.db.tutor.crud.Actualizar_Tutor;
 import aed.db.tutor.crud.Borrar_Tutor;
+import aed.db.tutor.crud.Buscar_Tutor;
 import aed.db.tutor.crud.Nombre_Tutor;
 import aed.ui.dialog.BuscarAlumnoDialog;
+import aed.ui.dialog.BuscarPracticasDialog;
 import aed.ui.dialog.BuscarTutorDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
@@ -163,7 +166,21 @@ public class TutorController implements Initializable {
     void onSearchAction(ActionEvent event) {
         BuscarTutorDialog dialog = new BuscarTutorDialog();
         dialog.showAndWait().ifPresent(buscar -> {
-            System.out.println(buscar.getIdTutor());
+
+            int idTutor = buscar.getIdTutor();
+            ObservableList<Tutor> resultado = Buscar_Tutor.buscarTutor(idTutor);
+
+            if (!resultado.isEmpty()) {
+                Tutor tutorEncontrada = resultado.get(0);
+                System.out.println("Tutor encontrado: " + tutorEncontrada.getIdTutor());
+
+                tutores.clear();
+                tutores.addAll(resultado);
+                tutorList.getSelectionModel().select(tutorEncontrada);
+
+            } else {
+                System.out.println("No se encontró un tutor con ID: " + idTutor);
+            }
         });
     }
 
