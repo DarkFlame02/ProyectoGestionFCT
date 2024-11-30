@@ -201,14 +201,14 @@ public class EmpresaController implements Initializable {
 
             if (!resultado.isEmpty()) {
                 Empresas empresaEncontrada = resultado.get(0);
-                System.out.println("Comentario encontrado: " + empresaEncontrada.getIdEmpresa());
+                System.out.println("Empresa encontrada: " + empresaEncontrada.getIdEmpresa());
 
                 empresas.clear();
                 empresas.addAll(resultado);
                 empresaList.getSelectionModel().select(empresaEncontrada);
 
             } else {
-                System.out.println("No se encontró un comentario con ID: " + idEmpresa);
+                System.out.println("No se encontró una empresa con ID: " + idEmpresa);
             }
         });
     }

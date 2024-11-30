@@ -62,7 +62,7 @@ public class BuscarPracticasDialog extends Dialog<Practicas> implements Initiali
     private Practicas onReSult(ButtonType buttonType) {
         if (buttonType.getButtonData() == ButtonBar.ButtonData.OK_DONE) {
             Practicas practicas = new Practicas();
-            practicas.setIdTutorE(Integer.parseInt(idPractica.get()));
+            practicas.setIdAlumno(Integer.parseInt(idPractica.get()));
             return practicas;
         }
         return null;

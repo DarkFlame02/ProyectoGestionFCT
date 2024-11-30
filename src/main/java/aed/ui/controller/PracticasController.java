@@ -1,16 +1,11 @@
 package aed.ui.controller;
 
-
-import aed.db.comentarios.Comentarios;
-import aed.db.comentarios.crud.Actualizar_Comentarios;
-import aed.db.empresas.Empresas;
-import aed.db.empresas.crud.Borrar_Empresas;
 import aed.db.practicas.Practicas;
 import aed.db.practicas.crud.Actualizar_Practicas;
 import aed.db.practicas.crud.Borrar_Practicas;
+import aed.db.practicas.crud.Buscar_Practicas;
 import aed.db.practicas.crud.Practicas_Empresa;
 import aed.ui.dialog.BuscarPracticasDialog;
-import aed.ui.dialog.BuscarVisitaDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -166,7 +161,21 @@ public class PracticasController implements Initializable {
     void onSearchAction(ActionEvent event) {
         BuscarPracticasDialog dialog = new BuscarPracticasDialog();
         dialog.showAndWait().ifPresent(buscar -> {
-            System.out.println(buscar.getIdTutorE());
+
+            int idAlumno = buscar.getIdAlumno();
+            ObservableList<Practicas> resultado = Buscar_Practicas.buscarPractica(idAlumno);
+
+            if (!resultado.isEmpty()) {
+                Practicas practicaEncontrada = resultado.get(0);
+                System.out.println("Practica encontrada: " + practicaEncontrada.getIdAlumno());
+
+                practicas.clear();
+                practicas.addAll(resultado);
+                practicaList.getSelectionModel().select(practicaEncontrada);
+
+            } else {
+                System.out.println("No se encontró una practica con ID: " + idAlumno);
+            }
         });
     }
 
