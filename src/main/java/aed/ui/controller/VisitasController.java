@@ -1,11 +1,11 @@
 package aed.ui.controller;
 
-import aed.db.practicas.crud.Actualizar_Practicas;
 import aed.db.tutor.Tutor;
-import aed.db.tutor.crud.Borrar_Tutor;
+import aed.db.tutor.crud.Buscar_Tutor;
 import aed.db.visitas.Visitas;
 import aed.db.visitas.crud.Actualizar_Visitas;
 import aed.db.visitas.crud.Borrar_Visitas;
+import aed.db.visitas.crud.Buscar_Visita;
 import aed.db.visitas.crud.Fecha_Visita;
 import aed.ui.dialog.BuscarVisitaDialog;
 import javafx.beans.Observable;
@@ -176,7 +176,21 @@ public class VisitasController implements Initializable {
     void onSearchAction(ActionEvent event) {
         BuscarVisitaDialog dialog = new BuscarVisitaDialog();
         dialog.showAndWait().ifPresent(buscar -> {
-            System.out.println(buscar.getIdVisita());
+
+            int idVisita = buscar.getIdVisita();
+            ObservableList<Visitas> resultado = Buscar_Visita.buscarVisita(idVisita);
+
+            if (!resultado.isEmpty()) {
+                Visitas visitaEncontrada = resultado.get(0);
+                System.out.println("Visita encontrada: " + visitaEncontrada.getIdVisita());
+
+                visitas.clear();
+                visitas.addAll(resultado);
+                visitaList.getSelectionModel().select(visitaEncontrada);
+
+            } else {
+                System.out.println("No se encontró una visita con ID: " + idVisita);
+            }
         });
     }
 
