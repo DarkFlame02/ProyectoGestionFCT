@@ -3,10 +3,13 @@ package aed.ui.controller;
 import aed.db.alumnos.Alumnos;
 import aed.db.alumnos.crud.Actualizar_Alumnos;
 import aed.db.alumnos.crud.Borrar_Alumnos;
+import aed.db.alumnos.crud.Buscar_Alumnos;
 import aed.db.comentarios.Comentarios;
 import aed.db.comentarios.crud.Actualizar_Comentarios;
 import aed.db.comentarios.crud.Borrar_Comentarios;
+import aed.db.comentarios.crud.Buscar_Comentarios;
 import aed.db.comentarios.crud.Comentarios_Empresa;
+import aed.ui.dialog.BuscarAlumnoDialog;
 import aed.ui.dialog.BuscarComentariosDialog;
 import aed.ui.dialog.BuscarVisitaDialog;
 import javafx.beans.Observable;
@@ -173,7 +176,21 @@ public class ComentariosController implements Initializable {
     void onSearchAction(ActionEvent event) {
         BuscarComentariosDialog dialog = new BuscarComentariosDialog();
         dialog.showAndWait().ifPresent(buscar -> {
-            System.out.println(buscar.getIdTutor());
+
+            int idEmpresa = buscar.getIdEmpresa();
+            ObservableList<Comentarios> resultado = Buscar_Comentarios.buscarComentarios(idEmpresa);
+
+            if (!resultado.isEmpty()) {
+                Comentarios comentarioEncontrado = resultado.get(0);
+                System.out.println("Comentario encontrado: " + comentarioEncontrado.getIdEmpresa());
+
+                comentarios.clear();
+                comentarios.addAll(resultado);
+                comentarioList.getSelectionModel().select(comentarioEncontrado);
+
+            } else {
+                System.out.println("No se encontró un comentario con ID: " + idEmpresa);
+            }
         });
     }
 
