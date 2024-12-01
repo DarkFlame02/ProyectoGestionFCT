@@ -4,11 +4,9 @@ import aed.db.alumnos.Alumnos;
 import aed.db.alumnos.crud.Actualizar_Alumnos;
 import aed.db.alumnos.crud.Borrar_Alumnos;
 import aed.db.alumnos.crud.Buscar_Alumnos;
+import aed.db.alumnos.crud.Crear_Alumnos;
 import aed.db.comentarios.Comentarios;
-import aed.db.comentarios.crud.Actualizar_Comentarios;
-import aed.db.comentarios.crud.Borrar_Comentarios;
-import aed.db.comentarios.crud.Buscar_Comentarios;
-import aed.db.comentarios.crud.Comentarios_Empresa;
+import aed.db.comentarios.crud.*;
 import aed.ui.dialog.BuscarAlumnoDialog;
 import aed.ui.dialog.BuscarComentariosDialog;
 import aed.ui.dialog.BuscarVisitaDialog;
@@ -36,6 +34,7 @@ import java.util.ResourceBundle;
 public class ComentariosController implements Initializable {
 
     // model
+    private Comentarios newComentario = new Comentarios();
 
     private final ObjectProperty<Comentarios> comentario = new SimpleObjectProperty<>();
     private final ListProperty<Comentarios> comentarios = new SimpleListProperty<>(
@@ -93,6 +92,8 @@ public class ComentariosController implements Initializable {
 
         selectedComentario.bind(comentarioList.getSelectionModel().selectedItemProperty());
         comentario.addListener(this::onComentarioChanged);
+
+        empresaText.setDisable(true);
     }
 
     private void onComentarioChanged(ObservableValue<? extends Comentarios> o, Comentarios oldValue, Comentarios newValue) {
@@ -133,11 +134,49 @@ public class ComentariosController implements Initializable {
     @FXML
     void onNewAction(ActionEvent event) {
 
+        newComentario.setComentario("");
+        newComentario.setIdEmpresa(1);
+        newComentario.setIdTutor(101);
+        newComentario.setNombreEmpresa("");
+
+        comentarios.add(newComentario);
     }
 
     @FXML
     void onAddAction(ActionEvent event) {
+        if (comentarioText.getText().isEmpty() || idEmpresaText.getText().isEmpty() ||
+                 tutorText.getText().isEmpty()) {
 
+            System.out.println("Todos los campos deben estar completos.");
+            return;
+        }
+
+        Comentarios nuevoComentario = new Comentarios();
+        nuevoComentario.setNombreEmpresa(empresaText.getText());
+        nuevoComentario.setIdEmpresa(Integer.parseInt(idEmpresaText.getText()));
+        nuevoComentario.setIdTutor(Integer.parseInt(tutorText.getText()));
+        nuevoComentario.setComentario(comentarioText.getText());
+
+        Crear_Comentarios creador = new Crear_Comentarios();
+        try {
+            creador.registrarComentarios(
+                    nuevoComentario.getIdEmpresa(),
+                    nuevoComentario.getIdTutor(),
+                    nuevoComentario.getComentario()
+            );
+            System.out.println("Alumno agregado correctamente.");
+
+            comentarios.add(nuevoComentario);
+            comentarios.remove(newComentario); //Está hecho un poco a lo matao.
+
+            idEmpresaText.clear();
+            empresaText.clear();
+            tutorText.clear();
+            comentarioText.clear();
+
+        } catch (Exception e) {
+            System.err.println("Error al agregar el alumno: " + e.getMessage());
+        }
     }
 
     @FXML
