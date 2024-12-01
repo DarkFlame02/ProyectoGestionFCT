@@ -103,6 +103,8 @@ public class EmpresaController implements Initializable {
 
         selectedEmpresa.bind(empresaList.getSelectionModel().selectedItemProperty());
         empresa.addListener(this::onEmpresaChanged);
+
+        idEmpresaText.setDisable(true);
     }
 
     private void onEmpresaChanged(ObservableValue<? extends Empresas> o, Empresas oldValue, Empresas newValue) {

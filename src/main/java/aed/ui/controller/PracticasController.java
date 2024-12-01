@@ -140,6 +140,7 @@ public class PracticasController implements Initializable {
 
             Practicas nuevaPractica = new Practicas();
             nuevaPractica.setIdAlumno(Integer.parseInt(idAlumnoText.getText()));
+            nuevaPractica.setNombreAlumno("Nuevo Alumno");
             nuevaPractica.setIdTutorE(Integer.parseInt(idTutorEText.getText()));
 
             Crear_Practicas creador = new Crear_Practicas();

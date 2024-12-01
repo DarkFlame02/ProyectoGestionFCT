@@ -150,6 +150,7 @@ public class VisitasController implements Initializable {
             Visitas nuevoVisita = new Visitas();
             nuevoVisita.setFechaVisita(Date.valueOf(visitaDate.getValue()));
             nuevoVisita.setIdAlumno(Integer.parseInt(idVisitaText.getText()));
+            nuevoVisita.setNombreAlumno("Nueva Visita");
             nuevoVisita.setComentario(comentarioText.getText());
 
             Crear_Visita creador = new Crear_Visita();

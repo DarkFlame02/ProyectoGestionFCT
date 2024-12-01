@@ -151,6 +151,7 @@ public class ComentariosController implements Initializable {
 
         Comentarios nuevoComentario = new Comentarios();
         nuevoComentario.setIdEmpresa(Integer.parseInt(idEmpresaText.getText()));
+        nuevoComentario.setNombreEmpresa("Nueva Empresa");
         nuevoComentario.setIdTutor(Integer.parseInt(tutorText.getText()));
         nuevoComentario.setComentario(comentarioText.getText());
 
