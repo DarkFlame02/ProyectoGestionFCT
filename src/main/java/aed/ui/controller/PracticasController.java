@@ -1,10 +1,8 @@
 package aed.ui.controller;
 
+import aed.db.empresas.crud.Crear_Empresas;
 import aed.db.practicas.Practicas;
-import aed.db.practicas.crud.Actualizar_Practicas;
-import aed.db.practicas.crud.Borrar_Practicas;
-import aed.db.practicas.crud.Buscar_Practicas;
-import aed.db.practicas.crud.Practicas_Empresa;
+import aed.db.practicas.crud.*;
 import aed.ui.dialog.BuscarPracticasDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
@@ -29,6 +27,7 @@ import java.util.ResourceBundle;
 public class PracticasController implements Initializable {
 
     // model
+    Practicas newPractica = new Practicas();
 
     private final ObjectProperty<Practicas> practica = new SimpleObjectProperty<>();
     private final ListProperty<Practicas> practicas = new SimpleListProperty<>(
@@ -86,6 +85,10 @@ public class PracticasController implements Initializable {
 
         selectedPractica.bind(practicaList.getSelectionModel().selectedItemProperty());
         practica.addListener(this::onPracticaChanged);
+
+        nombreAlumnoText.setDisable(true);
+        nombreTutorEText.setDisable(true);
+
     }
 
     private void onPracticaChanged(ObservableValue<? extends Practicas> o, Practicas oldValue, Practicas newValue) {
@@ -117,10 +120,43 @@ public class PracticasController implements Initializable {
     @FXML
     void onNewAction(ActionEvent event) {
 
+        newPractica.setNombreAlumno("");
+        newPractica.setNombreTutorE("");
+
+        practicas.add(newPractica);
+
     }
 
     @FXML
     void onAddAction(ActionEvent event) {
+
+        if (idAlumnoText.getText().isEmpty() || idTutorEText.getText().isEmpty()){
+
+            System.out.println("Todos los campos deben estar completos.");
+            return;
+        }
+
+        try {
+
+            Practicas nuevaPractica = new Practicas();
+            nuevaPractica.setIdAlumno(Integer.parseInt(idAlumnoText.getText()));
+            nuevaPractica.setIdTutorE(Integer.parseInt(idTutorEText.getText()));
+
+            Crear_Practicas creador = new Crear_Practicas();
+            creador.registrarPractica(
+                    nuevaPractica.getIdAlumno(),
+                    nuevaPractica.getIdTutorE()
+
+            );
+
+            practicas.add(nuevaPractica);
+            practicas.remove(newPractica);
+
+            System.out.println("Practicas añadida correctamente.");
+
+        } catch (Exception e) {
+            System.err.println("Error al añadir la practicas: " + e.getMessage());
+        }
 
     }
 

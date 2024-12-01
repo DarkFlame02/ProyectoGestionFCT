@@ -81,9 +81,7 @@ public class ComentariosController implements Initializable {
         comentarios.set(comentariosList);
 
         // bindings
-
         comentarioList.itemsProperty().bind(comentarios);
-
         comentarioList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 comentario.set(newValue);
@@ -95,6 +93,7 @@ public class ComentariosController implements Initializable {
 
         empresaText.setDisable(true);
     }
+
 
     private void onComentarioChanged(ObservableValue<? extends Comentarios> o, Comentarios oldValue, Comentarios newValue) {
         if (oldValue != null) {
@@ -118,13 +117,13 @@ public class ComentariosController implements Initializable {
             tutorText.setText(String.valueOf(newValue.getIdTutor()));
             comentarioText.setText(newValue.getComentario());
         } else {
-            // Limpia los campos si no hay un comentario seleccionado
             idEmpresaText.clear();
             empresaText.clear();
             tutorText.clear();
             comentarioText.clear();
         }
     }
+
 
 
     public BorderPane getRoot() {
@@ -134,10 +133,9 @@ public class ComentariosController implements Initializable {
     @FXML
     void onNewAction(ActionEvent event) {
 
-        newComentario.setComentario("");
         newComentario.setIdEmpresa(1);
         newComentario.setIdTutor(101);
-        newComentario.setNombreEmpresa("");
+        newComentario.setComentario("");
 
         comentarios.add(newComentario);
     }
@@ -152,7 +150,6 @@ public class ComentariosController implements Initializable {
         }
 
         Comentarios nuevoComentario = new Comentarios();
-        nuevoComentario.setNombreEmpresa(empresaText.getText());
         nuevoComentario.setIdEmpresa(Integer.parseInt(idEmpresaText.getText()));
         nuevoComentario.setIdTutor(Integer.parseInt(tutorText.getText()));
         nuevoComentario.setComentario(comentarioText.getText());
@@ -167,12 +164,7 @@ public class ComentariosController implements Initializable {
             System.out.println("Alumno agregado correctamente.");
 
             comentarios.add(nuevoComentario);
-            comentarios.remove(newComentario); //Está hecho un poco a lo matao.
-
-            idEmpresaText.clear();
-            empresaText.clear();
-            tutorText.clear();
-            comentarioText.clear();
+            comentarios.remove(newComentario);
 
         } catch (Exception e) {
             System.err.println("Error al agregar el alumno: " + e.getMessage());

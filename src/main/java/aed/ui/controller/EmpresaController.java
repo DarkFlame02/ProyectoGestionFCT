@@ -4,10 +4,7 @@ import aed.db.comentarios.Comentarios;
 import aed.db.comentarios.crud.Borrar_Comentarios;
 import aed.db.comentarios.crud.Buscar_Comentarios;
 import aed.db.empresas.Empresas;
-import aed.db.empresas.crud.Actualizar_Empresas;
-import aed.db.empresas.crud.Borrar_Empresas;
-import aed.db.empresas.crud.Buscar_Empresas;
-import aed.db.empresas.crud.Nombre_Empresa;
+import aed.db.empresas.crud.*;
 import aed.ui.dialog.BuscarComentariosDialog;
 import aed.ui.dialog.BuscarEmpresaDialog;
 import javafx.beans.Observable;
@@ -33,6 +30,7 @@ import java.util.ResourceBundle;
 public class EmpresaController implements Initializable {
 
     // model
+    private Empresas newEmpresa = new Empresas();
 
     private final ObjectProperty<Empresas> empresa = new SimpleObjectProperty<>();
     private final ListProperty<Empresas> empresas = new SimpleListProperty<>(
@@ -147,12 +145,56 @@ public class EmpresaController implements Initializable {
     @FXML
     void onNewAction(ActionEvent event) {
 
+        newEmpresa.setIdEmpresa(1);
+        newEmpresa.setNifEmpresa("");
+        newEmpresa.setNombreEmpresa("");
+        newEmpresa.setDireccionEmpresa("");
+        newEmpresa.setTipoEmpresa("");
+        newEmpresa.setNombreTutorE("");
+        newEmpresa.setApellidosTutorE("");
+        newEmpresa.setTelefonoContacto("");
+        newEmpresa.setEmailTutorE("");
+
+        empresas.add(newEmpresa);
+
     }
 
     @FXML
     void onAddAction(ActionEvent event) {
+        try {
 
+            Empresas nuevaEmpresa = new Empresas();
+            nuevaEmpresa.setNifEmpresa(nifText.getText());
+            nuevaEmpresa.setNombreEmpresa(nombreEmpresaText.getText());
+            nuevaEmpresa.setDireccionEmpresa(direccionEmpresaText.getText());
+            nuevaEmpresa.setTipoEmpresa(tipoEmpresaText.getText());
+            nuevaEmpresa.setNombreTutorE(nombreTutorEText.getText());
+            nuevaEmpresa.setApellidosTutorE(apellidosTutorEtext.getText());
+            nuevaEmpresa.setTelefonoContacto(telefonoTutorEText.getText());
+            nuevaEmpresa.setEmailTutorE(emailTutorEtext.getText());
+
+            Crear_Empresas creador = new Crear_Empresas();
+            creador.registrarEmpresa(
+                    nuevaEmpresa.getNifEmpresa(),
+                    nuevaEmpresa.getNombreEmpresa(),
+                    nuevaEmpresa.getDireccionEmpresa(),
+                    nuevaEmpresa.getTipoEmpresa(),
+                    nuevaEmpresa.getNombreTutorE(),
+                    nuevaEmpresa.getApellidosTutorE(),
+                    nuevaEmpresa.getTelefonoContacto(),
+                    nuevaEmpresa.getEmailTutorE()
+            );
+
+            empresas.add(nuevaEmpresa);
+            empresas.remove(newEmpresa);
+
+            System.out.println("Empresa añadida correctamente.");
+
+        } catch (Exception e) {
+            System.err.println("Error al añadir la empresa: " + e.getMessage());
+        }
     }
+
 
     @FXML
     void onCloseAction(ActionEvent event) {

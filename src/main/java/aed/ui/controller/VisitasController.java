@@ -1,12 +1,8 @@
 package aed.ui.controller;
 
-import aed.db.tutor.Tutor;
-import aed.db.tutor.crud.Buscar_Tutor;
+import aed.db.tutor.crud.Crear_Tutor;
 import aed.db.visitas.Visitas;
-import aed.db.visitas.crud.Actualizar_Visitas;
-import aed.db.visitas.crud.Borrar_Visitas;
-import aed.db.visitas.crud.Buscar_Visita;
-import aed.db.visitas.crud.Fecha_Visita;
+import aed.db.visitas.crud.*;
 import aed.ui.dialog.BuscarVisitaDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
@@ -31,6 +27,7 @@ import java.util.ResourceBundle;
 public class VisitasController implements Initializable {
 
     // model
+    private Visitas newVisita = new Visitas();
 
     private final ObjectProperty<Visitas> visita = new SimpleObjectProperty<>();
     private final ListProperty<Visitas> visitas = new SimpleListProperty<>(
@@ -89,7 +86,7 @@ public class VisitasController implements Initializable {
         selectedVisita.bind(visitaList.getSelectionModel().selectedItemProperty());
         visita.addListener(this::onVisitaChanged);
 
-        idVisitaText.setDisable(true);
+        nombreText.setDisable(true);
     }
 
     private void onVisitaChanged(ObservableValue<? extends Visitas> o, Visitas oldValue, Visitas newValue) {
@@ -133,11 +130,44 @@ public class VisitasController implements Initializable {
     @FXML
     void onNewAction(ActionEvent event) {
 
+        newVisita.setIdAlumno(1);
+        newVisita.setComentario("");
+
+        visitas.add(newVisita);
+
     }
 
     @FXML
     void onAddAction(ActionEvent event) {
+        if ((visitaDate.getValue()) == null || comentarioText.getText().isEmpty()|| idVisitaText.getText().isEmpty()){
 
+            System.out.println("Todos los campos deben estar completos.");
+            return;
+        }
+
+        try {
+
+            Visitas nuevoVisita = new Visitas();
+            nuevoVisita.setFechaVisita(Date.valueOf(visitaDate.getValue()));
+            nuevoVisita.setIdAlumno(Integer.parseInt(idVisitaText.getText()));
+            nuevoVisita.setComentario(comentarioText.getText());
+
+            Crear_Visita creador = new Crear_Visita();
+            creador.registrarVisitas(
+                    nuevoVisita.getFechaVisita(),
+                    nuevoVisita.getIdAlumno(),
+                    nuevoVisita.getComentario()
+
+            );
+
+            visitas.add(nuevoVisita);
+            visitas.remove(newVisita);
+
+            System.out.println("Visitas añadida correctamente.");
+
+        } catch (Exception e) {
+            System.err.println("Error al añadir la visita: " + e.getMessage());
+        }
     }
 
     @FXML

@@ -9,15 +9,14 @@ import java.sql.SQLException;
 
 public class Crear_Practicas {
 
-    public void registrarPractica() {
-        String query = "INSERT INTO asignacion(IdAlumnpo, IdTutorE) VALUES(?, ?)";
+    public void registrarPractica(int nombreAlumno, int nombreTutorE) {
+        String query = "INSERT INTO asignacion(IdAlumno, IdTutorE) VALUES(?, ?)";
 
         try (Connection conn = ConexionHCP.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            stmt.setInt(1,1);
-            stmt.setInt(2,1);
+            stmt.setInt(1,nombreAlumno);
+            stmt.setInt(2,nombreTutorE);
 
             int filasCreadas = stmt.executeUpdate();
             System.out.println(filasCreadas+" fila(s) creadas(s).");

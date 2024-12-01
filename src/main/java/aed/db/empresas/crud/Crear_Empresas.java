@@ -9,29 +9,28 @@ import java.sql.SQLException;
 
 public class Crear_Empresas {
 
-    public void registrarEmpresa() {
-        String query = "INSERT INTO empresa (nifEmpresa, nombreEmpresa, direccionEmpresa, tipoEmpresa) VALUES (?, ?, ?, ?); SET @lastId = LAST_INSERT_ID(); INSERT INTO TutorE_Primaria (nombreTutorE, apellidosTutorE, telefonoContacto, emailTutorE, idEmpresa) VALUES (?, ?, ?, ?, @lastId);\n";
+    public void registrarEmpresa(String nifEmpresa, String nombreEmpresa, String direccionEmpresa, String tipoEmpresa,
+                                 String nombreTutorE, String apellidosTutorE, String telefonoContacto, String emailTutorE) {
+        String query = "NSERT INTO empresa (nifEmpresa, nombreEmpresa, direccionEmpresa, tipoEmpresa) VALUES (?, ?, ?, ?); SET @lastId = LAST_INSERT_ID(); INSERT INTO TutorE_Primaria (nombreTutorE, apellidosTutorE, telefonoContacto, emailTutorE, idEmpresa) VALUES (?, ?, ?, ?, @lastId);";
 
         try (Connection conn = ConexionHCP.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            //Empresa
-            stmt.setString(1,"Empresa1");
-            stmt.setString(2,"Empresa1SL");
-            stmt.setString(3,"no tiene");
-            stmt.setString(4,"SA");
-            //tutorEmpresa
-            stmt.setString(5,"Pepe");
-            stmt.setString(6,"Pérez");
-            stmt.setString(7,"123456789");
-            stmt.setString(8,"Pp@gmail.com");
+            stmt.setString(1, nifEmpresa);
+            stmt.setString(2, nombreEmpresa);
+            stmt.setString(3, direccionEmpresa);
+            stmt.setString(4, tipoEmpresa);
+            stmt.setString(5, nombreTutorE);
+            stmt.setString(6, apellidosTutorE);
+            stmt.setString(7, telefonoContacto);
+            stmt.setString(8, emailTutorE);
 
-            int filasCreadas = stmt.executeUpdate();
-            System.out.println(filasCreadas+" fila(s) creadas(s).");
+            stmt.executeUpdate();
+            System.out.println("Registro insertado con éxito.");
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error al registrar la empresa: " + e.getMessage());
         }
     }
+
 }

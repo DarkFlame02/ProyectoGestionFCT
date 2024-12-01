@@ -1,17 +1,8 @@
 package aed.ui.controller;
 
-import aed.db.comentarios.Comentarios;
-import aed.db.comentarios.crud.Actualizar_Comentarios;
-import aed.db.practicas.Practicas;
-import aed.db.practicas.crud.Buscar_Practicas;
-import aed.db.practicas.crud.Practicas_Empresa;
+import aed.db.practicas.crud.Crear_Practicas;
 import aed.db.tutor.Tutor;
-import aed.db.tutor.crud.Actualizar_Tutor;
-import aed.db.tutor.crud.Borrar_Tutor;
-import aed.db.tutor.crud.Buscar_Tutor;
-import aed.db.tutor.crud.Nombre_Tutor;
-import aed.ui.dialog.BuscarAlumnoDialog;
-import aed.ui.dialog.BuscarPracticasDialog;
+import aed.db.tutor.crud.*;
 import aed.ui.dialog.BuscarTutorDialog;
 import javafx.beans.Observable;
 import javafx.beans.property.ListProperty;
@@ -36,6 +27,7 @@ import java.util.ResourceBundle;
 public class TutorController implements Initializable {
 
     // model
+    private Tutor newTutor = new Tutor();
 
     private final ObjectProperty<Tutor> tutor = new SimpleObjectProperty<>();
     private final ListProperty<Tutor> tutores = new SimpleListProperty<>(
@@ -122,12 +114,44 @@ public class TutorController implements Initializable {
 
     @FXML
     void onNewAction(ActionEvent event) {
+        newTutor.setNombreTutor("Nuevo");
+        newTutor.setApellidosTutor("Tutor");
+        newTutor.setEmailTutor("");
 
+        tutores.add(newTutor);
     }
 
     @FXML
     void onAddAction(ActionEvent event) {
+        if (nombreText.getText().isEmpty() || apellidosText.getText().isEmpty()|| emailText.getText().isEmpty()){
 
+            System.out.println("Todos los campos deben estar completos.");
+            return;
+        }
+
+        try {
+
+            Tutor nuevoTutor = new Tutor();
+            nuevoTutor.setNombreTutor(nombreText.getText());
+            nuevoTutor.setApellidosTutor(apellidosText.getText());
+            nuevoTutor.setEmailTutor(emailText.getText());
+
+            Crear_Tutor creador = new Crear_Tutor();
+            creador.registrarTutor(
+                    nuevoTutor.getNombreTutor(),
+                    nuevoTutor.getApellidosTutor(),
+                    nuevoTutor.getEmailTutor()
+
+            );
+
+            tutores.add(nuevoTutor);
+            tutores.remove(newTutor);
+
+            System.out.println("Practicas añadida correctamente.");
+
+        } catch (Exception e) {
+            System.err.println("Error al añadir la practicas: " + e.getMessage());
+        }
     }
 
     @FXML

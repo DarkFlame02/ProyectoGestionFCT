@@ -2,26 +2,19 @@ package aed.db.visitas.crud;
 
 import aed.db.conexionHCP.ConexionHCP;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Crear_Visita {
 
-    public void registrarVisitas() {
+    public void registrarVisitas(Date fecha, int id, String comentario) {
         String query = "INSERT INTO visitas(fechaVisita, idAlumno, comentario) VALUES(?, ?, ?)";
 
         try (Connection conn = ConexionHCP.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            String date = "2014-12-10";
-            java.sql.Date sqlFecha = java.sql.Date.valueOf(date);
-
-            stmt.setDate(1, sqlFecha);
-            stmt.setInt(2,1);
-            stmt.setString(3,"");
+            stmt.setDate(1, fecha);
+            stmt.setInt(2,id);
+            stmt.setString(3,comentario);
 
             int filasCreadas = stmt.executeUpdate();
             System.out.println(filasCreadas+" fila(s) creadas(s).");
